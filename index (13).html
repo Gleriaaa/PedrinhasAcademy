@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pedrinhas academy</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f4f5f7;--surface:#ffffff;--surface2:#eceef2;--text:#14171c;--muted:#5d6675;--border:#d9dde4;
+  --accent:#d98500;--accent-ink:#ffffff;--good:#1a8f4c;--bad:#c93a3a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0d10;--surface:#14181d;--surface2:#1c2128;--text:#e8ebef;--muted:#8d97a5;--border:#2b323b;
+    --accent:#f5a524;--accent-ink:#0b0d10;--good:#3ecf7a;--bad:#ff5a4d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0d10;--surface:#14181d;--surface2:#1c2128;--text:#e8ebef;--muted:#8d97a5;--border:#2b323b;
+  --accent:#f5a524;--accent-ink:#0b0d10;--good:#3ecf7a;--bad:#ff5a4d;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45;background-image:linear-gradient(135deg,rgba(255,255,255,.025) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.025) 50%,rgba(255,255,255,.025) 75%,transparent 75%);background-size:6px 6px}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) body{background-image:none}}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+header{border-left:6px solid var(--accent);padding:6px 0 6px 14px;margin-bottom:6px}
+header h1{margin:0;font-size:2rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-style:italic}
+header h1 span{color:#e02424}
+:root[data-theme="dark"] header h1 span{color:#ff4d4d}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header h1 span{color:#ff4d4d}}
+header p{margin:4px 0 0;color:var(--muted);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+h3{text-transform:uppercase;letter-spacing:.1em;font-size:.95rem;border-left:4px solid var(--accent);padding-left:10px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:4px;padding:12px 14px}
+.card .v{font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums}
+.card .l{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 16px}
+nav button,.btn{font:inherit;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;clip-path:polygon(0 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%)}
+nav button:hover,.btn:hover{border-color:var(--accent)}
+nav button.on,.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.btn.danger{color:var(--bad)}
+.btn.small{padding:3px 10px;font-size:.8rem}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:4px}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+th:nth-child(2),td:nth-child(2),th:first-child,td:first-child{text-align:left}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);background:var(--surface2);border-bottom:2px solid var(--accent)}
+td{font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--surface2)}
+.score{font-weight:700;color:var(--accent)}
+.tag{font-size:.68rem;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:2px;padding:2px 6px;margin-left:6px;text-transform:uppercase;letter-spacing:.08em}
+.sep td{background:var(--surface2);color:var(--muted);font-size:.78rem;text-align:left}
+.win{color:var(--good);font-weight:700}.loss{color:var(--bad);font-weight:700}
+.match{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;margin-bottom:12px;overflow:hidden}
+.match .top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);flex-wrap:wrap}
+.match .team{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-top:1px solid var(--border);font-weight:600}
+.match table{min-width:380px}
+.match .tablebox{border:none;border-radius:0}
+.empty{text-align:center;padding:36px 16px;color:var(--muted)}
+.note{color:var(--muted);font-size:.85rem}
+.profile-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+select,input{font:inherit;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 9px;min-width:0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.form-grid label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
+.prow{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:6px;margin-bottom:6px}
+.prow input[type=number]{width:100%}
+.tblock{border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:12px}
+.tblock .thead{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-weight:600}
+.tblock .thead input{width:80px}
+.chart{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:12px;margin-top:12px;overflow-x:auto}
+.formula{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:14px 16px}
+.formula code{background:var(--surface2);padding:2px 6px;border-radius:6px;font-size:.88rem;word-break:break-word}
+.formula li{margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>pedrinhas <span>academy</span></h1>
+    <p>Estatísticas dos nossos x5 de Rainbow Six Siege</p>
+  </header>
+  <div id="app"></div>
+</div>
+
+<script type="application/json" id="state">{"matches":[{"id":"m01","map":"Café Dostoiévski","teams":[{"score":7,"players":[{"p":"gmartinssr","k":14,"d":5,"a":2},{"p":"DeppinBoy","k":12,"d":6,"a":3},{"p":"IAlphaDarkl","k":6,"d":6,"a":2},{"p":"YyKaiser","k":7,"d":10,"a":2},{"p":"hnrqq","k":4,"d":10,"a":3}]},{"score":4,"players":[{"p":"Jhow.WOE","k":15,"d":9,"a":3},{"p":"rodourado","k":7,"d":9,"a":2},{"p":"GaviaoDelas","k":8,"d":9,"a":1},{"p":"C4piV4ra.M4nC4","k":3,"d":9,"a":1},{"p":"Paladin.Gx","k":4,"d":7,"a":2}]}]},{"id":"m02","map":"Chalé","teams":[{"score":7,"players":[{"p":"DeppinBoy","k":10,"d":8,"a":3},{"p":"YyKaiser","k":10,"d":10,"a":3},{"p":"gmartinssr","k":10,"d":8,"a":0},{"p":"hnrqq","k":10,"d":12,"a":2},{"p":"IAlphaDarkl","k":6,"d":9,"a":1}]},{"score":6,"players":[{"p":"Tus4k0_Tamusho","k":17,"d":7,"a":2},{"p":"GaviaoDelas","k":14,"d":9,"a":3},{"p":"Paladin.Gx","k":9,"d":11,"a":5},{"p":"OvercastJet7172","k":4,"d":9,"a":4},{"p":"Jhow.WOE","k":3,"d":11,"a":2}]}]},{"id":"m03","map":"Fronteira","teams":[{"score":7,"players":[{"p":"GaviaoDelas","k":16,"d":5,"a":2},{"p":"YyKaiser","k":7,"d":5,"a":3},{"p":"Jhow.WOE","k":12,"d":3,"a":2},{"p":"rodourado","k":3,"d":5,"a":4},{"p":"OvercastJet7172","k":3,"d":2,"a":2}]},{"score":2,"players":[{"p":"Paladin.Gx","k":9,"d":8,"a":1},{"p":"TheFodsbiel","k":6,"d":8,"a":2},{"p":"IAlphaDarkl","k":0,"d":8,"a":4},{"p":"DeppinBoy","k":2,"d":9,"a":1},{"p":"Steuguh_","k":2,"d":8,"a":1}]}]},{"id":"m04","map":"Avião Presidencial","teams":[{"score":5,"players":[{"p":"DeppinBoy","k":11,"d":9,"a":3},{"p":"Paladin.Gx","k":9,"d":11,"a":1},{"p":"rodourado","k":6,"d":7,"a":1},{"p":"durinhodematar","k":6,"d":10,"a":2},{"p":"GaviaoDelas","k":4,"d":10,"a":2}]},{"score":7,"players":[{"p":"YyKaiser","k":14,"d":9,"a":5},{"p":"OvercastJet7172","k":9,"d":5,"a":4},{"p":"hnrqq","k":12,"d":6,"a":2},{"p":"IAlphaDarkl","k":7,"d":7,"a":2},{"p":"TheFodsbiel","k":5,"d":9,"a":1}]}]},{"id":"m05","map":"Clube","teams":[{"score":7,"players":[{"p":"Tus4k0_Tamusho","k":12,"d":7,"a":5},{"p":"C4piV4ra.M4nC4","k":9,"d":8,"a":3},{"p":"Paladin.Gx","k":11,"d":7,"a":2},{"p":"GaviaoDelas","k":9,"d":9,"a":3},{"p":"rodourado","k":2,"d":7,"a":1}]},{"score":5,"players":[{"p":"Jhow.WOE","k":14,"d":8,"a":3},{"p":"DeppinBoy","k":11,"d":9,"a":3},{"p":"durinhodematar","k":6,"d":7,"a":0},{"p":"TheFodsbiel","k":6,"d":10,"a":2},{"p":"Steuguh_","k":1,"d":9,"a":2}]}]},{"id":"m06","map":"Chalé","teams":[{"score":7,"players":[{"p":"Jhow.WOE","k":17,"d":4,"a":2},{"p":"OvercastJet7172","k":8,"d":1,"a":0},{"p":"Steuguh_","k":6,"d":6,"a":4},{"p":"DeppinBoy","k":4,"d":5,"a":3},{"p":"durinhodematar","k":2,"d":4,"a":3}]},{"score":1,"players":[{"p":"rodourado","k":8,"d":8,"a":1},{"p":"IAlphaDarkl","k":4,"d":7,"a":1},{"p":"TheFodsbiel","k":6,"d":7,"a":0},{"p":"GaviaoDelas","k":1,"d":8,"a":2},{"p":"dinhoreis7","k":1,"d":7,"a":1}]}]},{"id":"m07","map":"Clube","teams":[{"score":7,"players":[{"p":"GaviaoDelas","k":16,"d":8,"a":4},{"p":"YyKaiser","k":18,"d":7,"a":2},{"p":"IAlphaDarkl","k":8,"d":6,"a":4},{"p":"Steuguh_","k":5,"d":8,"a":1},{"p":"durinhodematar","k":2,"d":6,"a":1}]},{"score":5,"players":[{"p":"Jhow.WOE","k":9,"d":10,"a":3},{"p":"rodourado","k":6,"d":10,"a":3},{"p":"DeppinBoy","k":6,"d":9,"a":6},{"p":"TheFodsbiel","k":9,"d":10,"a":3},{"p":"dinhoreis7","k":5,"d":10,"a":0}]}]},{"id":"m08","map":"Laboratórios Nighthaven","note":"Time derrotado com 4 jogadores no print (um saiu do jogo).","teams":[{"score":7,"players":[{"p":"Jhow.WOE","k":17,"d":6,"a":4},{"p":"DeppinBoy","k":8,"d":5,"a":2},{"p":"Steuguh_","k":8,"d":7,"a":2},{"p":"TheFodsbiel","k":2,"d":9,"a":2},{"p":"durinhodematar","k":3,"d":4,"a":0}]},{"score":3,"players":[{"p":"GaviaoDelas","k":15,"d":8,"a":2},{"p":"YyKaiser","k":11,"d":7,"a":2},{"p":"IAlphaDarkl","k":4,"d":9,"a":0},{"p":"rodourado","k":1,"d":8,"a":4}]}]},{"id":"m09","map":"Oregon","teams":[{"score":6,"players":[{"p":"GaviaoDelas","k":11,"d":10,"a":3},{"p":"Jhow.WOE","k":13,"d":10,"a":0},{"p":"rodourado","k":6,"d":10,"a":2},{"p":"Steuguh_","k":9,"d":12,"a":2},{"p":"IAlphaDarkl","k":5,"d":12,"a":0}]},{"score":8,"players":[{"p":"Paladin.Gx","k":15,"d":7,"a":3},{"p":"YyKaiser","k":13,"d":10,"a":3},{"p":"OvercastJet7172","k":11,"d":8,"a":1},{"p":"DeppinBoy","k":10,"d":9,"a":2},{"p":"durinhodematar","k":5,"d":10,"a":4}]}]},{"id":"m10","map":"Laboratórios Nighthaven","teams":[{"score":7,"players":[{"p":"rodourado","k":14,"d":9,"a":1},{"p":"Tus4k0_Tamusho","k":11,"d":11,"a":1},{"p":"GaviaoDelas","k":9,"d":10,"a":1},{"p":"durinhodematar","k":5,"d":8,"a":5},{"p":"AIRFLEX_WOE","k":7,"d":8,"a":2}]},{"score":5,"players":[{"p":"Jhow.WOE","k":15,"d":9,"a":4},{"p":"IAlphaDarkl","k":11,"d":7,"a":4},{"p":"DeppinBoy","k":11,"d":9,"a":3},{"p":"TheFodsbiel","k":8,"d":10,"a":2},{"p":"cl9_clebao67","k":1,"d":11,"a":0}]}]},{"id":"m11","map":"Fortaleza","note":"Print inclinado (modo replay): alguns números podem ter pequena imprecisão.","teams":[{"score":6,"players":[{"p":"Jhow.WOE","k":17,"d":10,"a":1},{"p":"IAlphaDarkl","k":11,"d":11,"a":5},{"p":"DeppinBoy","k":10,"d":10,"a":6},{"p":"TheFodsbiel","k":7,"d":11,"a":8},{"p":"cl9_clebao67","k":0,"d":13,"a":2}]},{"score":8,"players":[{"p":"Tus4k0_Tamusho","k":23,"d":7,"a":3},{"p":"GaviaoDelas","k":10,"d":11,"a":3},{"p":"rodourado","k":11,"d":10,"a":2},{"p":"durinhodematar","k":7,"d":7,"a":0},{"p":"AIRFLEX_WOE","k":3,"d":10,"a":2}]}]}]}</script>
+<script>
+(function(){
+  var STATE = JSON.parse(document.getElementById('state').textContent);
+  var view = 'ranking', selected = null;
+  var isOwner = false, artifact = null;
+  var CAP = 3, M = 10, MIN = 5, WK = 0.6, WW = 0.4;
+  var MAPS = ['Bank','Border','Chalet','Clubhouse','Consulate','Coastline','Emerald Plains','Kafe Dostoyevsky','Lair','Nighthaven Labs','Oregon','Outback','Skyscraper','Theme Park','Villa','Yacht','Fortress','Stadium Bravo','Close Quarter','Canal','Café Dostoiévski','Chalé','Fronteira','Avião Presidencial','Clube','Laboratórios Nighthaven','Fortaleza','Arranha-céu'];
+
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function f2(n){ return (Math.round(n*100)/100).toFixed(2).replace('.',','); }
+  function f1(n){ return (Math.round(n*10)/10).toFixed(1).replace('.',','); }
+  function pct(n){ return Math.round(n*100)+'%'; }
+  function fdate(s){ if(!s) return ''; var p=s.split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : s; }
+
+  function compute(d){
+    var per = {}, totPM = 0, sumKD = 0, wins = 0;
+    var ms = d.matches.slice().sort(function(a,b){ var x=a.date||'', y=b.date||''; return x<y?-1:(x>y?1:0); });
+    ms.forEach(function(m){
+      m.teams.forEach(function(t, ti){
+        var opp = m.teams[1-ti], won = t.score > opp.score;
+        t.players.forEach(function(s){
+          var p = per[s.p] || (per[s.p] = {name:s.p,n:0,k:0,d:0,a:0,w:0,sumKD:0,hist:[],best:null});
+          var kd = Math.min(s.k / Math.max(s.d,1), CAP);
+          p.n++; p.k += s.k; p.d += s.d; p.a += (s.a||0);
+          if(won) p.w++;
+          p.sumKD += kd;
+          p.hist.push({date:m.date,map:m.map,k:s.k,d:s.d,kd:kd,res:won?'W':'L',placar:t.score+' x '+opp.score});
+          if(!p.best || s.k - s.d > p.best.k - p.best.d) p.best = {k:s.k,d:s.d,map:m.map,date:m.date};
+          totPM++; sumKD += kd; if(won) wins++;
+        });
+      });
+    });
+    var avgKD = totPM ? sumKD/totPM : 1, avgWR = totPM ? wins/totPM : 0.5;
+    var list = Object.keys(per).map(function(k){
+      var p = per[k];
+      p.kd = p.sumKD / p.n;
+      p.totalKD = p.k / Math.max(p.d,1);
+      p.wr = p.w / p.n;
+      p.kdAdj = avgKD + (p.kd - avgKD) * p.n / (p.n + M);
+      p.wrAdj = avgWR + (p.wr - avgWR) * p.n / (p.n + M);
+      p.score = 100 * (WK * Math.min(p.kdAdj/2, 1) + WW * p.wrAdj);
+      p.ranked = p.n >= MIN;
+      return p;
+    });
+    list.sort(function(a,b){
+      if(a.ranked !== b.ranked) return a.ranked ? -1 : 1;
+      return b.score - a.score;
+    });
+    return {list:list, per:per, avgKD:avgKD, avgWR:avgWR, matches:ms};
+  }
+
+  function knownPlayers(){
+    var set = {};
+    STATE.matches.forEach(function(m){ m.teams.forEach(function(t){ t.players.forEach(function(s){ set[s.p]=1; }); }); });
+    return Object.keys(set).sort();
+  }
+
+  function render(){
+    var d = STATE, c = compute(d), app = document.getElementById('app');
+    var totalK = 0; d.matches.forEach(function(m){ m.teams.forEach(function(t){ t.players.forEach(function(s){ totalK += s.k; }); }); });
+    var h = '<div class="stats">'
+      + '<div class="card"><div class="v">'+d.matches.length+'</div><div class="l">Partidas</div></div>'
+      + '<div class="card"><div class="v">'+c.list.length+'</div><div class="l">Jogadores</div></div>'
+      + '<div class="card"><div class="v">'+totalK+'</div><div class="l">Kills totais</div></div>'
+      + '</div>';
+    var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['how','Como funciona']];
+    if(isOwner && artifact) tabs.push(['admin','+ Lançar partida']);
+    h += '<nav>' + tabs.map(function(t){ return '<button data-view="'+t[0]+'" class="'+(view===t[0]?'on':'')+'">'+t[1]+'</button>'; }).join('') + '</nav>';
+    if(view==='ranking') h += vRanking(c) + vRankKD(c);
+    else if(view==='matches') h += vMatches(c, d);
+    else if(view==='player') h += vPlayer(c);
+    else if(view==='how') h += vHow(c);
+    else if(view==='admin') h += vAdmin();
+    app.innerHTML = h;
+    bind();
+  }
+
+  function emptyBox(){ return '<div class="empty">Ainda não tem partidas lançadas.</div>'; }
+
+  function vRanking(c){
+    if(!c.list.length) return emptyBox();
+    var medals = ['🥇','🥈','🥉'], h = '<h3 style="margin:0 0 8px">Ranking Win/KD</h3><div class="tablebox"><table><thead><tr><th>#</th><th>Jogador</th><th>Nota</th><th>Partidas</th><th>K/D</th><th>Vitórias</th><th>K/D aj.</th></tr></thead><tbody>';
+    var pos = 0, shownSep = false;
+    c.list.forEach(function(p){
+      if(!p.ranked && !shownSep){ shownSep = true; h += '<tr class="sep"><td colspan="7">Provisórios · menos de '+MIN+' partidas, ainda fora do ranking oficial</td></tr>'; }
+      var label = '–';
+      if(p.ranked){ pos++; label = pos<=3 ? medals[pos-1] : pos; }
+      h += '<tr class="click" data-player="'+esc(p.name)+'"><td>'+label+'</td><td>'+esc(p.name)+(p.ranked?'':'<span class="tag">provisório</span>')+'</td>'
+        + '<td class="score">'+f1(p.score)+'</td><td>'+p.n+'</td><td>'+f2(p.kd)+'</td><td>'+pct(p.wr)+'</td><td>'+f2(p.kdAdj)+'</td></tr>';
+    });
+    h += '</tbody></table></div><p class="note">Toque num jogador pra ver o perfil. K/D é a média do K/D de cada partida (com teto de '+CAP+').</p>';
+    return h;
+  }
+
+  function vRankKD(c){
+    if(!c.list.length) return '';
+    var medals = ['🥇','🥈','🥉'];
+    var l = c.list.slice().sort(function(a,b){
+      if(a.ranked !== b.ranked) return a.ranked ? -1 : 1;
+      return b.totalKD - a.totalKD;
+    });
+    var h = '<h3 style="margin:24px 0 8px">Ranking só de Kill/Death</h3><div class="tablebox"><table><thead><tr><th>#</th><th>Jogador</th><th>K/D total</th><th>K/D médio</th><th>Kills</th><th>Deaths</th><th>Partidas</th></tr></thead><tbody>';
+    var pos = 0, shownSep = false;
+    l.forEach(function(p){
+      if(!p.ranked && !shownSep){ shownSep = true; h += '<tr class="sep"><td colspan="7">Provisórios · menos de '+MIN+' partidas</td></tr>'; }
+      var label = '–';
+      if(p.ranked){ pos++; label = pos<=3 ? medals[pos-1] : pos; }
+      h += '<tr class="click" data-player="'+esc(p.name)+'"><td>'+label+'</td><td>'+esc(p.name)+(p.ranked?'':'<span class="tag">provisório</span>')+'</td>'
+        + '<td class="score">'+f2(p.totalKD)+'</td><td>'+f2(p.kd)+'</td><td>'+p.k+'</td><td>'+p.d+'</td><td>'+p.n+'</td></tr>';
+    });
+    return h + '</tbody></table></div><p class="note">Ordenado pelo K/D total (todas as kills ÷ todas as deaths). O K/D médio é a média do K/D de cada partida.</p>';
+  }
+
+  function teamTable(t){
+    var rows = t.players.slice().sort(function(a,b){ return b.k - a.k; });
+    var h = '<div class="tablebox"><table><thead><tr><th>Jogador</th><th>K</th><th>D</th><th>A</th><th>K/D</th></tr></thead><tbody>';
+    rows.forEach(function(s){
+      h += '<tr><td>'+esc(s.p)+'</td><td>'+s.k+'</td><td>'+s.d+'</td><td>'+(s.a||0)+'</td><td>'+f2(s.k/Math.max(s.d,1))+'</td></tr>';
+    });
+    return h + '</tbody></table></div>';
+  }
+
+  function vMatches(c, d){
+    if(!d.matches.length) return emptyBox();
+    var h = '';
+    c.matches.slice().reverse().forEach(function(m){
+      var ts = m.teams.slice().sort(function(a,b){ return b.score - a.score; });
+      h += '<div class="match"><div class="top"><div><b>'+esc(m.map||'Mapa não informado')+'</b>'+(m.date?' · '+fdate(m.date):'')+'</div>'
+        + '<div><b>'+ts[0].score+' x '+ts[1].score+'</b>'
+        + (isOwner && artifact ? ' <button class="btn small danger" data-del="'+esc(m.id)+'">Excluir</button>' : '')
+        + '</div></div>';
+      ts.forEach(function(t, i){
+        var won = t.score > ts[1-i].score;
+        h += '<div class="team"><span>Time '+(i+1)+'</span><span class="'+(won?'win':'loss')+'">'+(won?'VITÓRIA':'DERROTA')+' · '+t.score+'</span></div>' + teamTable(t);
+      });
+      if(m.note) h += '<div class="note" style="padding:8px 14px">'+esc(m.note)+'</div>';
+      h += '</div>';
+    });
+    return h;
+  }
+
+  function vPlayer(c){
+    if(!c.list.length) return emptyBox();
+    if(!selected || !c.per[selected]) selected = c.list[0].name;
+    var p = c.per[selected];
+    var rankPos = c.list.filter(function(x){ return x.ranked; }).indexOf(p) + 1;
+    var h = '<div class="profile-head"><select id="psel">'
+      + c.list.map(function(x){ return '<option value="'+esc(x.name)+'"'+(x.name===selected?' selected':'')+'>'+esc(x.name)+'</option>'; }).join('')
+      + '</select>' + (p.ranked ? '<span class="tag">#'+rankPos+' no ranking</span>' : '<span class="tag">provisório</span>') + '</div>';
+    h += '<div class="stats">'
+      + '<div class="card"><div class="v score">'+f1(p.score)+'</div><div class="l">Nota</div></div>'
+      + '<div class="card"><div class="v">'+p.n+'</div><div class="l">Partidas</div></div>'
+      + '<div class="card"><div class="v">'+f2(p.kd)+'</div><div class="l">K/D médio</div></div>'
+      + '<div class="card"><div class="v">'+f2(p.totalKD)+'</div><div class="l">K/D total</div></div>'
+      + '<div class="card"><div class="v">'+pct(p.wr)+'</div><div class="l">Vitórias</div></div>'
+      + '<div class="card"><div class="v">'+f1(p.k/p.n)+'</div><div class="l">Kills/partida</div></div>'
+      + '<div class="card"><div class="v">'+f1(p.d/p.n)+'</div><div class="l">Deaths/partida</div></div>'
+      + '<div class="card"><div class="v">'+p.best.k+'/'+p.best.d+'</div><div class="l">Melhor partida</div></div>'
+      + '</div>';
+    h += '<div class="chart"><div class="l note" style="margin-bottom:6px">K/D por partida (teto '+CAP+')</div>'+spark(p.hist)+'</div>';
+    h += '<p class="note">Últimas partidas</p><div class="tablebox"><table><thead><tr><th>Mapa</th><th>Placar</th><th>K</th><th>D</th><th>Resultado</th></tr></thead><tbody>';
+    p.hist.slice().reverse().slice(0,10).forEach(function(x){
+      h += '<tr><td>'+esc(x.map||'')+(x.date?' · '+fdate(x.date):'')+'</td><td>'+x.placar+'</td><td>'+x.k+'</td><td>'+x.d+'</td><td class="'+(x.res==='W'?'win':'loss')+'">'+(x.res==='W'?'V':'D')+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+    return h;
+  }
+
+  function spark(hist){
+    var W = Math.max(320, hist.length*44), H = 140, pad = 24;
+    var max = CAP, n = hist.length;
+    function X(i){ return n===1 ? W/2 : pad + i*(W-2*pad)/(n-1); }
+    function Y(v){ return H - pad - (v/max)*(H-2*pad); }
+    var pts = hist.map(function(x,i){ return X(i)+','+Y(x.kd); }).join(' ');
+    var svg = '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="K/D por partida">';
+    svg += '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+Y(1)+'" y2="'+Y(1)+'" stroke="var(--border)" stroke-dasharray="4 4"/>';
+    svg += '<text x="4" y="'+(Y(1)+4)+'" font-size="10" fill="var(--muted)">1,0</text>';
+    if(n>1) svg += '<polyline fill="none" stroke="var(--accent)" stroke-width="2" points="'+pts+'"/>';
+    hist.forEach(function(x,i){
+      svg += '<circle cx="'+X(i)+'" cy="'+Y(x.kd)+'" r="4" fill="'+(x.res==='W'?'var(--good)':'var(--bad)')+'"><title>'+esc(x.map||'')+' · '+x.k+'/'+x.d+'</title></circle>';
+    });
+    return svg + '</svg><div class="note">Ponto verde = vitória, vermelho = derrota</div>';
+  }
+
+  function vHow(c){
+    return '<div class="formula"><p>Pra ninguém subir no ranking por sorte de uma partida só, a nota ajusta o desempenho pela <b>quantidade de partidas</b>.</p><ol>'
+      + '<li><b>K/D por partida</b> tem teto de <code>'+CAP+'</code>, e 0 deaths conta como 1 death. Assim um 30/0 não distorce tudo.</li>'
+      + '<li><b>Vitória</b> é do time do jogador: vence quem fez mais rounds na partida.</li>'
+      + '<li><b>Ajuste:</b> <code>KD_aj = média_grupo + (KD_jogador − média_grupo) × n / (n + '+M+')</code>, e o mesmo vale pra taxa de vitórias. Com poucas partidas o jogador fica perto da média do grupo, e com muitas partidas o desempenho real conta quase todo.</li>'
+      + '<li><b>Nota final (0–100):</b> <code>100 × ('+WK+' × min(KD_aj / 2, 1) + '+WW+' × WR_aj)</code>. K/D pesa 60% e vitórias 40%.</li>'
+      + '<li><b>Mínimo de '+MIN+' partidas</b> pra entrar no ranking oficial. Quem tem menos aparece como provisório.</li></ol>'
+      + '<p class="note">Médias atuais do grupo: K/D '+f2(c.avgKD)+' · vitórias '+pct(c.avgWR)+'.</p></div>';
+  }
+
+  function prow(){
+    return '<div class="prow"><input class="pn" list="plist" placeholder="Jogador"><input class="pk" type="number" min="0" placeholder="K"><input class="pd" type="number" min="0" placeholder="D"><input class="pa" type="number" min="0" placeholder="A"><button type="button" class="btn small danger" data-act="rm-row">✕</button></div>';
+  }
+  function tblock(i){
+    return '<div class="tblock" data-team="'+i+'"><div class="thead">Time '+i+' · rounds <input class="ts" type="number" min="0"></div><div class="rows">'+prow()+prow()+prow()+prow()+prow()+'</div><button type="button" class="btn small" data-act="add-row">+ Jogador</button></div>';
+  }
+
+  function vAdmin(){
+    return '<div class="formula"><b>Lançar partida</b><div class="form-grid" style="margin-top:12px">'
+      + '<label>Data (opcional)<input id="f-date" type="date"></label>'
+      + '<label>Mapa<input id="f-map" list="maplist" placeholder="Ex.: Clube"></label></div>'
+      + '<datalist id="maplist">'+MAPS.map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
+      + '<datalist id="plist">'+knownPlayers().map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
+      + tblock(1) + tblock(2)
+      + '<button class="btn primary" data-act="save-match">Salvar partida</button>'
+      + '<p class="note" id="f-msg"></p></div>';
+  }
+
+  function bind(){
+    var app = document.getElementById('app');
+    Array.prototype.forEach.call(app.querySelectorAll('[data-view]'), function(b){ b.onclick = function(){ view = b.getAttribute('data-view'); render(); }; });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-player]'), function(r){ r.onclick = function(){ selected = r.getAttribute('data-player'); view = 'player'; render(); }; });
+    var sel = document.getElementById('psel'); if(sel) sel.onchange = function(){ selected = sel.value; render(); };
+    Array.prototype.forEach.call(app.querySelectorAll('[data-act]'), function(b){
+      b.onclick = function(){
+        var a = b.getAttribute('data-act');
+        if(a==='add-row'){ b.parentNode.querySelector('.rows').insertAdjacentHTML('beforeend', prow()); bind(); }
+        else if(a==='rm-row'){ b.parentNode.remove(); }
+        else if(a==='save-match'){ saveMatch(); }
+      };
+    });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-del]'), function(b){
+      b.onclick = function(){
+        if(!confirm('Excluir essa partida?')) return;
+        var id = b.getAttribute('data-del');
+        STATE.matches = STATE.matches.filter(function(m){ return m.id !== id; });
+        publish();
+      };
+    });
+  }
+
+  function saveMatch(){
+    var msg = document.getElementById('f-msg'), teams = [], seen = {}, bad = false;
+    Array.prototype.forEach.call(document.querySelectorAll('.tblock'), function(tb){
+      var score = tb.querySelector('.ts').value, players = [];
+      if(score===''){ bad = true; return; }
+      Array.prototype.forEach.call(tb.querySelectorAll('.prow'), function(r){
+        var n = r.querySelector('.pn').value.trim(), k = r.querySelector('.pk').value, d = r.querySelector('.pd').value, a = r.querySelector('.pa').value;
+        if(!n && k==='' && d==='') return;
+        if(!n || k==='' || d==='' || seen[n.toLowerCase()]){ bad = true; return; }
+        seen[n.toLowerCase()] = 1;
+        players.push({p:n,k:Math.max(0,parseInt(k,10)),d:Math.max(0,parseInt(d,10)),a:a===''?0:Math.max(0,parseInt(a,10))});
+      });
+      if(!players.length) bad = true;
+      teams.push({score:Math.max(0,parseInt(score,10)),players:players});
+    });
+    if(bad || teams.length!==2){ msg.textContent = 'Confira os campos: cada time precisa de rounds e jogadores, e cada jogador de nome, K e D, sem nomes repetidos.'; return; }
+    var m = {id:'m'+Date.now(),map:document.getElementById('f-map').value.trim(),teams:teams};
+    var date = document.getElementById('f-date').value; if(date) m.date = date;
+    STATE.matches.push(m);
+    msg.textContent = 'Salvando...';
+    publish();
+  }
+
+  function publish(){
+    var clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#state').textContent = JSON.stringify(STATE).replace(/</g,'\\u003c');
+    clone.querySelector('#app').innerHTML = '';
+    clone.removeAttribute('data-theme');
+    artifact.publish('<!doctype html>\n' + clone.outerHTML).catch(function(e){
+      var m = document.getElementById('f-msg');
+      if(m) m.textContent = 'Não consegui salvar (' + ((e && e.code) || 'erro') + '). Tente de novo.';
+    });
+  }
+
+  render();
+
+  (function(){
+    if(!window.claude || !window.claude.use) return;
+    Promise.all([window.claude.use('user'), window.claude.use('artifact')]).then(function(r){
+      var user = r[0], art = r[1];
+      try { isOwner = !!(user && user.isOwner()); } catch(e){ isOwner = false; }
+      artifact = art;
+      if(isOwner && artifact) render();
+    }).catch(function(){});
+  })();
+})();
+</script>
+</body>
+</html>

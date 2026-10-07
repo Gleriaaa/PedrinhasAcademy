@@ -4,87 +4,296 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>pedrinhas academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Saira+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&display=swap">
 <style>
 :root{
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
-  --bg:#f4f5f7;--surface:#ffffff;--surface2:#eceef2;--text:#14171c;--muted:#5d6675;--border:#d9dde4;
-  --accent:#d98500;--accent-ink:#ffffff;--good:#1a8f4c;--bad:#c93a3a;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0b0d10;--surface:#14181d;--surface2:#1c2128;--text:#e8ebef;--muted:#8d97a5;--border:#2b323b;
-    --accent:#f5a524;--accent-ink:#0b0d10;--good:#3ecf7a;--bad:#ff5a4d;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0b0d10;--surface:#14181d;--surface2:#1c2128;--text:#e8ebef;--muted:#8d97a5;--border:#2b323b;
-  --accent:#f5a524;--accent-ink:#0b0d10;--good:#3ecf7a;--bad:#ff5a4d;
+  color-scheme:dark;
+  --bg-000:#0a0d12;--bg-100:#11151c;--bg-200:#181d26;--line:#262d38;--line-strong:#3a4350;
+  --grid-line:#ffffff0a;--accent-glow:#f29b1d2e;
+  --ink:#e9edf2;--ink-muted:#a3adba;--ink-faint:#7f8a99;
+  --accent:#f29b1d;--on-accent:#0a0d12;--brand-red:#ff4b42;--defense:#4aa8ff;--win:#4fd08f;--loss:#ff6a5c;
+  --tier-copper:#c0714a;--tier-bronze:#cf9358;--tier-silver:#b9c3cd;--tier-gold:#f2c94c;--tier-platinum:#46d3c6;--tier-emerald:#4cd97b;--tier-diamond:#b896ff;--tier-champions:#ff5c93;
+  --font-display:"Saira Condensed","Arial Narrow",sans-serif;--font-sans:"Barlow",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;
+  --cut-sm:6px;--cut-md:14px;--cut-lg:28px;--radius-pill:999px;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45;background-image:linear-gradient(135deg,rgba(255,255,255,.025) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.025) 50%,rgba(255,255,255,.025) 75%,transparent 75%);background-size:6px 6px}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) body{background-image:none}}
-.wrap{max-width:960px;margin:0 auto;padding:20px 16px 48px}
-header{border-left:6px solid var(--accent);padding:6px 0 6px 14px;margin-bottom:6px}
-header h1{margin:0;font-size:2rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-style:italic}
-header h1 span{color:#e02424}
-:root[data-theme="dark"] header h1 span{color:#ff4d4d}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header h1 span{color:#ff4d4d}}
-header p{margin:4px 0 0;color:var(--muted);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
-h3{text-transform:uppercase;letter-spacing:.1em;font-size:.95rem;border-left:4px solid var(--accent);padding-left:10px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
-.card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:4px;padding:12px 14px}
-.card .v{font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums}
-.card .l{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 16px}
-nav button,.btn{font:inherit;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;clip-path:polygon(0 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%)}
-nav button:hover,.btn:hover{border-color:var(--accent)}
-nav button.on,.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
-.btn.danger{color:var(--bad)}
-.btn.small{padding:3px 10px;font-size:.8rem}
-.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:4px}
-table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
-th:nth-child(2),td:nth-child(2),th:first-child,td:first-child{text-align:left}
-th{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);background:var(--surface2);border-bottom:2px solid var(--accent)}
-td{font-variant-numeric:tabular-nums}
-tr:last-child td{border-bottom:none}
-tr.click{cursor:pointer}
-tr.click:hover td{background:var(--surface2)}
-.score{font-weight:700;color:var(--accent)}
-.tag{font-size:.68rem;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:2px;padding:2px 6px;margin-left:6px;text-transform:uppercase;letter-spacing:.08em}
-.sep td{background:var(--surface2);color:var(--muted);font-size:.78rem;text-align:left}
-.win{color:var(--good);font-weight:700}.loss{color:var(--bad);font-weight:700}
-.match{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;margin-bottom:12px;overflow:hidden}
-.match .top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);flex-wrap:wrap}
-.match .team{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-top:1px solid var(--border);font-weight:600}
-.match table{min-width:380px}
-.match .tablebox{border:none;border-radius:0}
-.empty{text-align:center;padding:36px 16px;color:var(--muted)}
-.note{color:var(--muted);font-size:.85rem}
-.profile-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-select,input{font:inherit;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 9px;min-width:0}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
-.form-grid label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted)}
-.prow{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:6px;margin-bottom:6px}
-.prow input[type=number]{width:100%}
-.tblock{border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:12px}
-.tblock .thead{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-weight:600}
-.tblock .thead input{width:80px}
-.chart{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:12px;margin-top:12px;overflow-x:auto}
-.formula{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:14px 16px}
-.formula code{background:var(--surface2);padding:2px 6px;border-radius:6px;font-size:.88rem;word-break:break-word}
-.formula li{margin-bottom:8px}
+body{margin:0}
+.wrap{max-width:960px;margin:0 auto;padding:var(--space-4) var(--space-4) 64px}
+.pa-gap{height:var(--space-6)}
+/* Pedrinhas Academy — componentes (CSS puro, prefixo pa-). Valores vêm de tokens.css. */
+
+/* ---------- Base: fundo tático ---------- */
+.pa-app {
+  background-color: var(--bg-000);
+  background-image:
+    radial-gradient(ellipse 70% 360px at 50% -80px, var(--accent-glow), transparent 70%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-repeat: no-repeat, repeat, repeat;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px; line-height: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+.pa-app *, .pa-app *::before, .pa-app *::after { box-sizing: border-box; }
+.pa-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; font-size: 14px; }
+.pa-label { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+.pa-caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-faint); }
+:where(.pa-app) :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- AppHeader ---------- */
+.pa-hud {
+  display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;
+  padding: var(--space-2) 0; border-bottom: 1px solid var(--line);
+}
+.pa-live { display: inline-flex; align-items: center; gap: var(--space-2); }
+.pa-live::before { content: ""; width: 7px; height: 7px; border-radius: var(--radius-pill); background: var(--brand-red); box-shadow: 0 0 8px var(--brand-red); }
+.pa-header {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;
+  padding: var(--space-5) 0 var(--space-5);
+}
+.pa-wordmark {
+  margin: 0;
+  font-family: var(--font-display); font-style: italic; font-weight: 800;
+  font-size: 52px; line-height: 48px; letter-spacing: .02em; text-transform: uppercase;
+  color: var(--ink);
+}
+.pa-wordmark b { font-weight: 800; color: var(--brand-red); }
+.pa-tagline { margin: var(--space-2) 0 0; display: flex; align-items: center; gap: var(--space-3); }
+.pa-tagline::before { content: ""; width: 40px; height: 6px; background: repeating-linear-gradient(-45deg, var(--accent) 0 3px, transparent 3px 7px); }
+.pa-games { display: flex; gap: var(--space-2); }
+.pa-game {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 16px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-muted); background: var(--bg-200); text-decoration: none;
+  clip-path: polygon(var(--cut-md) 0, 100% 0, calc(100% - var(--cut-md)) 100%, 0 100%);
+}
+.pa-game[aria-current="page"] { color: var(--on-accent); background: var(--accent); }
+.pa-game[aria-disabled="true"] { color: var(--ink-faint); background: var(--bg-100); cursor: not-allowed; }
+.pa-game small { font-family: var(--font-sans); font-style: normal; font-size: 10px; letter-spacing: .14em; font-weight: 600; }
+
+/* ---------- SectionTabs ---------- */
+.pa-tabs { display: flex; flex-wrap: wrap; gap: var(--space-1); border-bottom: 1px solid var(--line-strong); }
+.pa-tab {
+  position: relative; padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display); font-weight: 700; font-size: 17px; line-height: 20px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-faint); background: none; border: 0; cursor: pointer; text-decoration: none;
+  transition: color .12s;
+}
+.pa-tab:hover { color: var(--ink); }
+.pa-tab[aria-selected="true"] { color: var(--ink); background: linear-gradient(to top, var(--accent-glow), transparent); }
+.pa-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+/* ---------- Section heading (com faixa de breach) ---------- */
+.pa-heading {
+  display: flex; align-items: center; gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 24px; line-height: 28px; letter-spacing: .04em; text-transform: uppercase;
+}
+.pa-heading i { color: var(--accent); }
+.pa-heading::after { content: ""; flex: 1; height: 8px; background: linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px) left center / 100% 1px no-repeat, repeating-linear-gradient(-45deg, var(--line-strong) 0 2px, transparent 2px 8px) right / 64px 8px no-repeat; }
+
+/* ---------- StatTile (cantoneiras de HUD) ---------- */
+.pa-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); }
+.pa-stat { position: relative; padding: var(--space-4) var(--space-5) var(--space-5); background: var(--bg-100); }
+.pa-stat::before, .pa-stat::after { content: ""; position: absolute; width: 14px; height: 14px; }
+.pa-stat::before { left: 0; top: 0; border-left: 2px solid var(--accent); border-top: 2px solid var(--accent); }
+.pa-stat::after { right: 0; bottom: 0; border-right: 2px solid var(--line-strong); border-bottom: 2px solid var(--line-strong); }
+.pa-stat__head { display: flex; justify-content: space-between; }
+.pa-stat__value { display: block; margin-top: var(--space-2); font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 56px; line-height: 52px; font-variant-numeric: tabular-nums; }
+
+/* ---------- RankEmblem + TierBadge ---------- */
+.pa-emblem, .pa-tier { --t: var(--tier-silver); }
+[data-tier="copper"]    { --t: var(--tier-copper); }
+[data-tier="bronze"]    { --t: var(--tier-bronze); }
+[data-tier="silver"]    { --t: var(--tier-silver); }
+[data-tier="gold"]      { --t: var(--tier-gold); }
+[data-tier="platinum"]  { --t: var(--tier-platinum); }
+[data-tier="emerald"]   { --t: var(--tier-emerald); }
+[data-tier="diamond"]   { --t: var(--tier-diamond); }
+[data-tier="champions"] { --t: var(--tier-champions); }
+[data-tier="unranked"]  { --t: var(--ink-faint); }
+
+.pa-emblem {
+  --s: 56px;
+  position: relative; flex: none;
+  display: inline-grid; place-items: center;
+  width: var(--s); height: calc(var(--s) * 1.1547);
+  background: var(--t);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.pa-emblem::before {
+  content: ""; position: absolute; inset: calc(var(--s) * .09);
+  background: var(--bg-100);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.pa-emblem::after {
+  content: ""; position: relative; width: 48%; height: 40%;
+  background: var(--t);
+  clip-path: polygon(50% 0, 100% 38%, 100% 62%, 50% 24%, 0 62%, 0 38%);
+}
+.pa-emblem[data-tier="champions"]::before { background: var(--t); }
+.pa-emblem[data-tier="champions"]::after { background: var(--bg-000); height: 46%; clip-path: polygon(50% 0,100% 28%,100% 44%,50% 16%,0 44%,0 28%); }
+.pa-emblem[data-tier="unranked"]::after { content: "?"; width: auto; height: auto; background: none; clip-path: none; color: var(--ink-faint); font-family: var(--font-display); font-weight: 800; font-size: calc(var(--s) * .42); line-height: 1; }
+.pa-emblem--sm { --s: 22px; }
+.pa-emblem--lg { --s: 88px; }
+
+.pa-tier {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--t);
+}
+
+/* ---------- Podium (Top 3) ---------- */
+.pa-podium { display: grid; grid-template-columns: 1fr 1.15fr 1fr; align-items: end; gap: var(--space-4); }
+.pa-pod {
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: var(--space-5) var(--space-4); background: var(--bg-100);
+  clip-path: polygon(0 0, calc(100% - var(--cut-md)) 0, 100% var(--cut-md), 100% 100%, 0 100%);
+}
+.pa-pod--1 { padding-top: var(--space-6); padding-bottom: var(--space-6); background: radial-gradient(ellipse at 50% 0, var(--accent-glow), transparent 70%), var(--bg-100); }
+.pa-pod--1::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); }
+.pa-pod__pos { position: absolute; left: var(--space-4); top: var(--space-3); font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 28px; line-height: 28px; color: var(--ink-faint); }
+.pa-pod--1 .pa-pod__pos { color: var(--accent); }
+.pa-pod__name { margin: var(--space-3) 0 2px; font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 26px; letter-spacing: .03em; text-transform: uppercase; overflow-wrap: anywhere; }
+.pa-pod--1 .pa-pod__name { font-size: 26px; line-height: 30px; }
+.pa-pod__nota { margin: var(--space-3) 0 var(--space-2); font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 44px; line-height: 44px; color: var(--accent); }
+.pa-pod--1 .pa-pod__nota { font-size: 56px; line-height: 52px; }
+.pa-pod__meta { display: flex; gap: var(--space-4); }
+
+/* ---------- RankingTable ---------- */
+.pa-table-wrap { background: var(--bg-100); overflow-x: auto; clip-path: polygon(0 0, calc(100% - var(--cut-md)) 0, 100% var(--cut-md), 100% 100%, 0 100%); }
+.pa-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+.pa-table th { padding: var(--space-3) var(--space-4); background: var(--bg-200); text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line-strong); }
+.pa-table th:nth-child(-n+2), .pa-table td:nth-child(-n+2) { text-align: left; }
+.pa-table td { padding: var(--space-3) var(--space-4); text-align: right; border-bottom: 1px solid var(--line); vertical-align: middle; transition: background .12s; }
+.pa-table tbody tr:hover td { background: var(--bg-200); }
+.pa-pos { width: 60px; font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 20px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.pa-row--podium .pa-pos { color: var(--accent); font-size: 24px; }
+.pa-row--podium td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.pa-player { display: flex; align-items: center; gap: var(--space-3); }
+.pa-player__text { display: flex; flex-direction: column; gap: 1px; }
+.pa-player__name { font-weight: 600; color: var(--ink); }
+.pa-nota { display: inline-flex; align-items: center; gap: var(--space-3); justify-content: flex-end; }
+.pa-nota__value { font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 22px; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 3.2ch; }
+.pa-bar { width: 80px; height: 4px; background: var(--bg-200); overflow: hidden; transform: skewX(-20deg); }
+.pa-table tbody tr:hover .pa-bar { background: var(--line-strong); }
+.pa-bar > span { display: block; height: 100%; background: var(--accent); }
+.pa-good { color: var(--win); }
+.pa-adj { color: var(--defense); }
+.pa-table tr.pa-divider td { padding: var(--space-4) var(--space-4) var(--space-2); background: var(--bg-100); text-align: left; border-bottom: 1px solid var(--line-strong); }
+.pa-row--prov .pa-pos { font-size: 14px; }
+.pa-row--prov .pa-player__name { color: var(--ink-muted); }
+.pa-row--prov .pa-nota__value { color: var(--ink-muted); }
+.pa-row--prov .pa-bar > span { background: var(--ink-faint); }
+.pa-placement { display: inline-flex; gap: 3px; vertical-align: middle; }
+.pa-placement i { width: 10px; height: 4px; background: var(--line-strong); transform: skewX(-20deg); }
+.pa-placement i.on { background: var(--ink-muted); }
+
+/* ---------- Result pips ---------- */
+.pa-form { display: inline-flex; gap: 3px; }
+.pa-pip {
+  display: inline-grid; place-items: center; width: 24px; height: 20px;
+  font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 12px; line-height: 1; color: var(--bg-000);
+  clip-path: polygon(var(--cut-sm) 0, 100% 0, calc(100% - var(--cut-sm)) 100%, 0 100%);
+}
+.pa-pip--v { background: var(--win); }
+.pa-pip--d { background: var(--loss); }
+
+/* ---------- PlayerCard ---------- */
+.pa-card {
+  position: relative; background: var(--bg-100); padding: var(--space-5);
+  clip-path: polygon(0 0, calc(100% - var(--cut-lg)) 0, 100% var(--cut-lg), 100% 100%, 0 100%);
+}
+.pa-card::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--t, var(--accent)) 0 64px, var(--line) 64px); }
+.pa-card__top { display: flex; align-items: center; gap: var(--space-4); }
+.pa-card__rank { position: absolute; right: var(--space-6); top: var(--space-4); font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: 72px; line-height: 60px; color: var(--bg-200); letter-spacing: -.02em; }
+.pa-card__name { position: relative; margin: 2px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 32px; letter-spacing: .02em; text-transform: uppercase; overflow-wrap: anywhere; }
+.pa-card__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin: var(--space-5) 0; padding-top: var(--space-4); border-top: 1px solid var(--line); }
+.pa-card__big { display: block; margin-top: var(--space-1); font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 34px; line-height: 34px; font-variant-numeric: tabular-nums; }
+.pa-card__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+
+/* ---------- MatchCard ---------- */
+.pa-match { background: var(--bg-100); clip-path: polygon(0 0, calc(100% - var(--cut-md)) 0, 100% var(--cut-md), 100% 100%, 0 100%); }
+.pa-match__top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--line); }
+.pa-match__map { font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 24px; line-height: 26px; letter-spacing: .04em; text-transform: uppercase; }
+.pa-match__score { display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 44px; line-height: 44px; font-variant-numeric: tabular-nums; }
+.pa-match__score .o { color: var(--accent); }
+.pa-match__score .b { color: var(--defense); }
+.pa-match__score .sep { color: var(--ink-faint); font-size: 24px; }
+.pa-rounds { display: grid; gap: 3px; justify-self: end; }
+.pa-rounds__row { display: flex; gap: 3px; }
+.pa-rounds__row i { width: 10px; height: 10px; background: var(--bg-200); }
+.pa-rounds__row--o i.w { background: var(--accent); }
+.pa-rounds__row--b i.w { background: var(--defense); }
+.pa-match__teams { display: grid; grid-template-columns: 1fr 1fr; }
+.pa-team { padding: var(--space-3) var(--space-5) var(--space-4); }
+.pa-team + .pa-team { border-left: 1px solid var(--line); }
+.pa-team__head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); padding-bottom: var(--space-2); }
+.pa-team__name { font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; }
+.pa-team--o .pa-team__name { color: var(--accent); }
+.pa-team--b .pa-team__name { color: var(--defense); }
+.pa-team ol { list-style: none; margin: 0; padding: 0; }
+.pa-team li { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); padding: 5px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.pa-team li .pa-num { color: var(--ink-muted); }
+.pa-mvp { display: inline-block; margin-left: var(--space-2); padding: 1px 6px; font-family: var(--font-display); font-style: italic; font-weight: 800; font-size: 11px; letter-spacing: .1em; color: var(--on-accent); background: var(--accent); }
+.pa-result { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.pa-result--v { color: var(--win); }
+.pa-result--d { color: var(--loss); }
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  .pa-podium { grid-template-columns: 1fr; }
+  .pa-pod--1 { order: -1; }
+  .pa-wordmark { font-size: 38px; line-height: 36px; }
+  .pa-match__top { grid-template-columns: 1fr auto; }
+  .pa-rounds { grid-column: 1 / -1; justify-self: start; }
+  .pa-match__teams { grid-template-columns: 1fr; }
+  .pa-team + .pa-team { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---------- Extras do site ---------- */
+.pa-click{cursor:pointer}
+.pa-panel{background:var(--bg-100);padding:var(--space-5);clip-path:polygon(0 0,calc(100% - var(--cut-md)) 0,100% var(--cut-md),100% 100%,0 100%)}
+.pa-panel p{margin:0 0 var(--space-3)}
+.pa-panel ol{margin:0;padding-left:20px}
+.pa-panel li{margin-bottom:var(--space-3);color:var(--ink-muted)}
+.pa-panel li b{color:var(--ink)}
+.pa-panel code{font-family:var(--font-mono);font-size:13px;background:var(--bg-200);padding:2px 6px;color:var(--accent);overflow-wrap:anywhere}
+.pa-list{display:grid;gap:var(--space-4)}
+.pa-match__top{grid-template-columns:1fr auto}
+.pa-btn{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:0;padding:var(--space-2) var(--space-5);color:var(--on-accent);background:var(--accent);clip-path:polygon(var(--cut-sm) 0,100% 0,calc(100% - var(--cut-sm)) 100%,0 100%)}
+.pa-btn--ghost{background:var(--bg-200);color:var(--ink-muted)}
+.pa-btn--ghost:hover{color:var(--ink)}
+.pa-btn--sm{font-size:12px;padding:4px var(--space-4)}
+.pa-btn--danger{color:var(--loss)}
+.pa-input,.pa-select{font-family:var(--font-sans);font-size:15px;color:var(--ink);background:var(--bg-200);border:1px solid var(--line-strong);border-radius:0;padding:var(--space-2) var(--space-3);min-width:0;width:100%}
+.pa-select{width:auto;max-width:100%}
+.pa-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-4);margin-bottom:var(--space-4)}
+.pa-field{display:flex;flex-direction:column;gap:var(--space-1)}
+.pa-tblock{border:1px solid var(--line);padding:var(--space-4);margin-bottom:var(--space-4)}
+.pa-tblock__head{display:flex;gap:var(--space-3);align-items:center;margin-bottom:var(--space-3)}
+.pa-tblock__head .pa-input{width:90px}
+.pa-prow{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:6px;margin-bottom:6px}
+.pa-toolbar{display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-4)}
+.pa-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-4)}
+.pa-cards .pa-card{cursor:pointer}
+.pa-chart{background:var(--bg-100);padding:var(--space-4);overflow-x:auto}
+.pa-empty{background:var(--bg-100);padding:var(--space-6);text-align:center;color:var(--ink-muted)}
+.pa-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-2);margin-top:var(--space-3)}
+.pa-tiers div{display:flex;align-items:center;gap:var(--space-2);justify-content:space-between;background:var(--bg-200);padding:6px var(--space-3)}
+.pa-tab{white-space:nowrap}
+.pa-tabs{overflow-x:auto;flex-wrap:nowrap}
 </style>
 </head>
-<body>
+<body class="pa-app">
 <div class="wrap">
-  <header>
-    <h1>pedrinhas <span>academy</span></h1>
-    <p>Estatísticas dos nossos x5 de Rainbow Six Siege</p>
-  </header>
   <div id="app"></div>
 </div>
 
@@ -96,12 +305,14 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
   var isOwner = false, artifact = null;
   var CAP = 3, M = 10, MIN = 5, WK = 0.6, WW = 0.4;
   var MAPS = ['Bank','Border','Chalet','Clubhouse','Consulate','Coastline','Emerald Plains','Kafe Dostoyevsky','Lair','Nighthaven Labs','Oregon','Outback','Skyscraper','Theme Park','Villa','Yacht','Fortress','Stadium Bravo','Close Quarter','Canal','Café Dostoiévski','Chalé','Fronteira','Avião Presidencial','Clube','Laboratórios Nighthaven','Fortaleza','Arranha-céu'];
+  var TIERNAMES = {champions:'Champions',diamond:'Diamond',emerald:'Emerald',platinum:'Platinum',gold:'Gold',silver:'Silver',bronze:'Bronze',copper:'Copper',unranked:'Unranked'};
 
   function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function f2(n){ return (Math.round(n*100)/100).toFixed(2).replace('.',','); }
   function f1(n){ return (Math.round(n*10)/10).toFixed(1).replace('.',','); }
   function pct(n){ return Math.round(n*100)+'%'; }
   function fdate(s){ if(!s) return ''; var p=s.split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : s; }
+  function pad2(n){ return (n<10?'0':'')+n; }
 
   function compute(d){
     var per = {}, totPM = 0, sumKD = 0, wins = 0;
@@ -115,7 +326,7 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
           p.n++; p.k += s.k; p.d += s.d; p.a += (s.a||0);
           if(won) p.w++;
           p.sumKD += kd;
-          p.hist.push({date:m.date,map:m.map,k:s.k,d:s.d,kd:kd,res:won?'W':'L',placar:t.score+' x '+opp.score});
+          p.hist.push({date:m.date,map:m.map,k:s.k,d:s.d,kd:kd,res:won?'W':'L',placar:t.score+' – '+opp.score});
           if(!p.best || s.k - s.d > p.best.k - p.best.d) p.best = {k:s.k,d:s.d,map:m.map,date:m.date};
           totPM++; sumKD += kd; if(won) wins++;
         });
@@ -137,7 +348,22 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
       if(a.ranked !== b.ranked) return a.ranked ? -1 : 1;
       return b.score - a.score;
     });
+    var pos = 0;
+    list.forEach(function(p){
+      if(p.ranked){ pos++; p.pos = pos; p.tier = tierOf(p.score, pos); } else { p.pos = 0; p.tier = 'unranked'; }
+    });
     return {list:list, per:per, avgKD:avgKD, avgWR:avgWR, matches:ms};
+  }
+
+  function tierOf(score, pos){
+    if(pos <= 3) return 'champions';
+    if(score >= 54) return 'diamond';
+    if(score >= 52) return 'emerald';
+    if(score >= 50) return 'platinum';
+    if(score >= 48) return 'gold';
+    if(score >= 46) return 'silver';
+    if(score >= 44) return 'bronze';
+    return 'copper';
   }
 
   function knownPlayers(){
@@ -146,18 +372,26 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
     return Object.keys(set).sort();
   }
 
+  function emblem(tier, size){ return '<span class="pa-emblem'+(size?' pa-emblem--'+size:'')+'" data-tier="'+tier+'"></span>'; }
+  function tierBadge(tier, label){ return '<span class="pa-tier" data-tier="'+tier+'">'+(label||TIERNAMES[tier])+'</span>'; }
+  function heading(n, text){ return '<h2 class="pa-heading"><i>'+n+' /</i> '+text+'</h2>'; }
+  function placement(n){ var s='<span class="pa-placement" aria-label="'+n+' de '+MIN+' partidas">'; for(var i=0;i<MIN;i++) s+='<i'+(i<n?' class="on"':'')+'></i>'; return s+'</span>'; }
+
   function render(){
     var d = STATE, c = compute(d), app = document.getElementById('app');
     var totalK = 0; d.matches.forEach(function(m){ m.teams.forEach(function(t){ t.players.forEach(function(s){ totalK += s.k; }); }); });
-    var h = '<div class="stats">'
-      + '<div class="card"><div class="v">'+d.matches.length+'</div><div class="l">Partidas</div></div>'
-      + '<div class="card"><div class="v">'+c.list.length+'</div><div class="l">Jogadores</div></div>'
-      + '<div class="card"><div class="v">'+totalK+'</div><div class="l">Kills totais</div></div>'
-      + '</div>';
+    var h = '<div class="pa-hud"><span class="pa-label pa-live">Ranked x5 · Temporada 01</span><span class="pa-label">'+d.matches.length+' partidas lançadas</span></div>'
+      + '<header class="pa-header"><div><h1 class="pa-wordmark">Pedrinhas <b>Academy</b></h1><p class="pa-label pa-tagline">Estatísticas dos nossos x5</p></div>'
+      + '<nav class="pa-games" aria-label="Jogo"><a class="pa-game" href="#r6" aria-current="page">R6 Siege</a><a class="pa-game" aria-disabled="true">FC Clubs <small>em breve</small></a></nav></header>'
+      + '<div class="pa-stats">'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Partidas</span><span class="pa-label">01</span></div><span class="pa-stat__value">'+d.matches.length+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Operadores</span><span class="pa-label">02</span></div><span class="pa-stat__value">'+c.list.length+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Kills totais</span><span class="pa-label">03</span></div><span class="pa-stat__value">'+totalK+'</span></div>'
+      + '</div><div class="pa-gap" style="height:24px"></div>';
     var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['how','Como funciona']];
     if(isOwner && artifact) tabs.push(['admin','+ Lançar partida']);
-    h += '<nav>' + tabs.map(function(t){ return '<button data-view="'+t[0]+'" class="'+(view===t[0]?'on':'')+'">'+t[1]+'</button>'; }).join('') + '</nav>';
-    if(view==='ranking') h += vRanking(c) + vRankKD(c);
+    h += '<nav class="pa-tabs" role="tablist">' + tabs.map(function(t){ return '<button class="pa-tab" role="tab" data-view="'+t[0]+'" aria-selected="'+(view===t[0])+'">'+t[1]+'</button>'; }).join('') + '</nav><div class="pa-gap"></div>';
+    if(view==='ranking') h += vRanking(c);
     else if(view==='matches') h += vMatches(c, d);
     else if(view==='player') h += vPlayer(c);
     else if(view==='how') h += vHow(c);
@@ -166,151 +400,175 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
     bind();
   }
 
-  function emptyBox(){ return '<div class="empty">Ainda não tem partidas lançadas.</div>'; }
+  function emptyBox(){ return '<div class="pa-empty">Ainda não tem partidas lançadas.</div>'; }
+
+  function podium(c){
+    var r = c.list.filter(function(p){ return p.ranked; }).slice(0,3);
+    if(r.length < 3) return '';
+    function pod(p, i, big){
+      return '<article class="pa-pod pa-pod--'+i+'"><span class="pa-pod__pos">#'+i+'</span>'+emblem('champions', big?'lg':'')
+        + '<h3 class="pa-pod__name">'+esc(p.name)+'</h3>'+tierBadge('champions')
+        + '<span class="pa-pod__nota">'+f1(p.score)+'</span>'
+        + '<div class="pa-pod__meta"><span class="pa-label">K/D <b style="color:var(--ink)">'+f2(p.kd)+'</b></span><span class="pa-label">Win <b style="color:var(--ink)">'+pct(p.wr)+'</b></span></div></article>';
+    }
+    return heading('01','Top 3 · Champions') + '<div class="pa-podium">'+pod(r[1],2,false)+pod(r[0],1,true)+pod(r[2],3,false)+'</div><div class="pa-gap"></div>';
+  }
+
+  function playerCell(p, withTier){
+    var sub = p.ranked ? (withTier ? tierBadge(p.tier) : '') : '<span class="pa-caption">Placement '+placement(p.n)+' '+p.n+'/'+MIN+'</span>';
+    return '<div class="pa-player">'+(withTier ? emblem(p.tier,'sm') : '')+'<div class="pa-player__text"><span class="pa-player__name">'+esc(p.name)+'</span>'+sub+'</div></div>';
+  }
 
   function vRanking(c){
     if(!c.list.length) return emptyBox();
-    var medals = ['🥇','🥈','🥉'], h = '<h3 style="margin:0 0 8px">Ranking Win/KD</h3><div class="tablebox"><table><thead><tr><th>#</th><th>Jogador</th><th>Nota</th><th>Partidas</th><th>K/D</th><th>Vitórias</th><th>K/D aj.</th></tr></thead><tbody>';
-    var pos = 0, shownSep = false;
+    var h = podium(c);
+    // Tabela Win/KD
+    h += heading('02','Ranking Win/KD') + '<div class="pa-table-wrap"><table class="pa-table"><thead><tr><th class="pa-label">#</th><th class="pa-label">Jogador</th><th class="pa-label">Nota</th><th class="pa-label">Partidas</th><th class="pa-label">K/D</th><th class="pa-label">Win %</th><th class="pa-label">K/D aj.</th></tr></thead><tbody>';
+    var shown = false;
     c.list.forEach(function(p){
-      if(!p.ranked && !shownSep){ shownSep = true; h += '<tr class="sep"><td colspan="7">Provisórios · menos de '+MIN+' partidas, ainda fora do ranking oficial</td></tr>'; }
-      var label = '–';
-      if(p.ranked){ pos++; label = pos<=3 ? medals[pos-1] : pos; }
-      h += '<tr class="click" data-player="'+esc(p.name)+'"><td>'+label+'</td><td>'+esc(p.name)+(p.ranked?'':'<span class="tag">provisório</span>')+'</td>'
-        + '<td class="score">'+f1(p.score)+'</td><td>'+p.n+'</td><td>'+f2(p.kd)+'</td><td>'+pct(p.wr)+'</td><td>'+f2(p.kdAdj)+'</td></tr>';
+      if(!p.ranked && !shown){ shown = true; h += '<tr class="pa-divider"><td colspan="7" class="pa-label">Unranked · em placement, menos de '+MIN+' partidas · fora do ranking oficial</td></tr>'; }
+      h += '<tr class="pa-row pa-click'+(p.ranked && p.pos<=3?' pa-row--podium':'')+(p.ranked?'':' pa-row--prov')+'" data-player="'+esc(p.name)+'"><td class="pa-pos">'+(p.ranked?pad2(p.pos):'—')+'</td>'
+        + '<td>'+playerCell(p, true)+'</td>'
+        + '<td><span class="pa-nota"><span class="pa-bar"><span style="width:'+Math.min(100,p.score).toFixed(1)+'%"></span></span><span class="pa-nota__value">'+f1(p.score)+'</span></span></td>'
+        + '<td class="pa-num">'+p.n+'</td><td class="pa-num">'+f2(p.kd)+'</td><td class="pa-num'+(p.wr>=0.5?' pa-good':'')+'">'+pct(p.wr)+'</td><td class="pa-num pa-adj">'+f2(p.kdAdj)+'</td></tr>';
     });
-    h += '</tbody></table></div><p class="note">Toque num jogador pra ver o perfil. K/D é a média do K/D de cada partida (com teto de '+CAP+').</p>';
-    return h;
-  }
-
-  function vRankKD(c){
-    if(!c.list.length) return '';
-    var medals = ['🥇','🥈','🥉'];
+    h += '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Nota = K/D, vitórias e partidas jogadas. Top 3 = Champions; abaixo, o rank vem da Nota. Com menos de '+MIN+' partidas o jogador fica Unranked, em placement. Clique num jogador pra ver o perfil.</p><div class="pa-gap"></div>';
+    // Tabela só Kill/Death
     var l = c.list.slice().sort(function(a,b){
       if(a.ranked !== b.ranked) return a.ranked ? -1 : 1;
       return b.totalKD - a.totalKD;
     });
-    var h = '<h3 style="margin:24px 0 8px">Ranking só de Kill/Death</h3><div class="tablebox"><table><thead><tr><th>#</th><th>Jogador</th><th>K/D total</th><th>K/D médio</th><th>Kills</th><th>Deaths</th><th>Partidas</th></tr></thead><tbody>';
-    var pos = 0, shownSep = false;
+    h += heading('03','Ranking Kill/Death') + '<div class="pa-table-wrap"><table class="pa-table"><thead><tr><th class="pa-label">#</th><th class="pa-label">Jogador</th><th class="pa-label">K/D total</th><th class="pa-label">K/D médio</th><th class="pa-label">Kills</th><th class="pa-label">Deaths</th><th class="pa-label">Partidas</th></tr></thead><tbody>';
+    var pos = 0; shown = false;
     l.forEach(function(p){
-      if(!p.ranked && !shownSep){ shownSep = true; h += '<tr class="sep"><td colspan="7">Provisórios · menos de '+MIN+' partidas</td></tr>'; }
-      var label = '–';
-      if(p.ranked){ pos++; label = pos<=3 ? medals[pos-1] : pos; }
-      h += '<tr class="click" data-player="'+esc(p.name)+'"><td>'+label+'</td><td>'+esc(p.name)+(p.ranked?'':'<span class="tag">provisório</span>')+'</td>'
-        + '<td class="score">'+f2(p.totalKD)+'</td><td>'+f2(p.kd)+'</td><td>'+p.k+'</td><td>'+p.d+'</td><td>'+p.n+'</td></tr>';
+      if(!p.ranked && !shown){ shown = true; h += '<tr class="pa-divider"><td colspan="7" class="pa-label">Unranked · em placement, menos de '+MIN+' partidas</td></tr>'; }
+      if(p.ranked) pos++;
+      h += '<tr class="pa-row pa-click'+(p.ranked && pos<=3?' pa-row--podium':'')+(p.ranked?'':' pa-row--prov')+'" data-player="'+esc(p.name)+'"><td class="pa-pos">'+(p.ranked?pad2(pos):'—')+'</td>'
+        + '<td>'+playerCell(p, false)+'</td>'
+        + '<td><span class="pa-nota"><span class="pa-nota__value">'+f2(p.totalKD)+'</span></span></td>'
+        + '<td class="pa-num">'+f2(p.kd)+'</td><td class="pa-num">'+p.k+'</td><td class="pa-num">'+p.d+'</td><td class="pa-num">'+p.n+'</td></tr>';
     });
-    return h + '</tbody></table></div><p class="note">Ordenado pelo K/D total (todas as kills ÷ todas as deaths). O K/D médio é a média do K/D de cada partida.</p>';
+    return h + '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Ordenado pelo K/D total (todas as kills ÷ todas as deaths). O K/D médio é a média do K/D de cada partida, com teto de '+CAP+'.</p>';
   }
 
-  function teamTable(t){
+  function teamBlock(t, opp, cls, name){
+    var won = t.score > opp.score;
     var rows = t.players.slice().sort(function(a,b){ return b.k - a.k; });
-    var h = '<div class="tablebox"><table><thead><tr><th>Jogador</th><th>K</th><th>D</th><th>A</th><th>K/D</th></tr></thead><tbody>';
-    rows.forEach(function(s){
-      h += '<tr><td>'+esc(s.p)+'</td><td>'+s.k+'</td><td>'+s.d+'</td><td>'+(s.a||0)+'</td><td>'+f2(s.k/Math.max(s.d,1))+'</td></tr>';
-    });
-    return h + '</tbody></table></div>';
+    return '<div class="pa-team pa-team--'+cls+'"><div class="pa-team__head"><span class="pa-team__name">'+name+'</span><span class="pa-result pa-result--'+(won?'v':'d')+'">'+(won?'Vitória':'Derrota')+'</span></div><ol>'
+      + rows.map(function(s){ return '<li><span>'+esc(s.p)+'</span><span class="pa-num">'+s.k+' – '+s.d+'</span></li>'; }).join('') + '</ol></div>';
   }
 
   function vMatches(c, d){
     if(!d.matches.length) return emptyBox();
-    var h = '';
-    c.matches.slice().reverse().forEach(function(m){
-      var ts = m.teams.slice().sort(function(a,b){ return b.score - a.score; });
-      h += '<div class="match"><div class="top"><div><b>'+esc(m.map||'Mapa não informado')+'</b>'+(m.date?' · '+fdate(m.date):'')+'</div>'
-        + '<div><b>'+ts[0].score+' x '+ts[1].score+'</b>'
-        + (isOwner && artifact ? ' <button class="btn small danger" data-del="'+esc(m.id)+'">Excluir</button>' : '')
-        + '</div></div>';
-      ts.forEach(function(t, i){
-        var won = t.score > ts[1-i].score;
-        h += '<div class="team"><span>Time '+(i+1)+'</span><span class="'+(won?'win':'loss')+'">'+(won?'VITÓRIA':'DERROTA')+' · '+t.score+'</span></div>' + teamTable(t);
-      });
-      if(m.note) h += '<div class="note" style="padding:8px 14px">'+esc(m.note)+'</div>';
-      h += '</div>';
-    });
-    return h;
+    var h = heading('01','Partidas') + '<div class="pa-list">';
+    for(var i=c.matches.length-1;i>=0;i--){
+      var m = c.matches[i], a = m.teams[0], b = m.teams[1];
+      h += '<article class="pa-match"><div class="pa-match__top"><div><div class="pa-match__map">'+esc(m.map||'Mapa não informado')+'</div>'
+        + '<span class="pa-caption">Partida '+(i+1)+(m.date?' · '+fdate(m.date):'')+' · '+(a.score+b.score)+' rounds</span>'
+        + (isOwner && artifact ? ' <button class="pa-btn pa-btn--ghost pa-btn--sm pa-btn--danger" data-del="'+esc(m.id)+'">Excluir</button>' : '')
+        + '</div><div class="pa-match__score"><span class="o">'+a.score+'</span><span class="sep">–</span><span class="b">'+b.score+'</span></div></div>'
+        + '<div class="pa-match__teams">'+teamBlock(a,b,'o','Orange Team')+teamBlock(b,a,'b','Blue Team')+'</div>'
+        + (m.note ? '<p class="pa-caption" style="padding:0 var(--space-5) var(--space-4);margin:0">'+esc(m.note)+'</p>' : '')
+        + '</article>';
+    }
+    return h + '</div>';
+  }
+
+  function playerCard(p, extraAttr){
+    var last = p.hist.slice(-5);
+    return '<article class="pa-card" data-tier="'+p.tier+'" '+(extraAttr||'')+'>'
+      + '<span class="pa-card__rank" aria-hidden="true">'+(p.ranked?'#'+pad2(p.pos):'')+'</span>'
+      + '<div class="pa-card__top">'+emblem(p.tier)+'<div>'+tierBadge(p.tier, p.ranked?null:'Unranked · Placement '+p.n+'/'+MIN)+'<h3 class="pa-card__name">'+esc(p.name)+'</h3><span class="pa-caption">'+p.n+' partidas</span></div></div>'
+      + '<div class="pa-card__grid"><div><span class="pa-label">Nota</span><span class="pa-card__big" style="color:'+(p.ranked?'var(--accent)':'var(--ink-muted)')+'">'+f1(p.score)+'</span></div>'
+      + '<div><span class="pa-label">K/D</span><span class="pa-card__big">'+f2(p.kd)+'</span></div>'
+      + '<div><span class="pa-label">Win %</span><span class="pa-card__big">'+pct(p.wr)+'</span></div></div>'
+      + '<div class="pa-card__foot"><span class="pa-label">Últimas '+last.length+'</span><span class="pa-form">'
+      + last.map(function(x){ return '<span class="pa-pip pa-pip--'+(x.res==='W'?'v':'d')+'">'+(x.res==='W'?'V':'D')+'</span>'; }).join('')
+      + '</span></div></article>';
   }
 
   function vPlayer(c){
     if(!c.list.length) return emptyBox();
-    if(!selected || !c.per[selected]) selected = c.list[0].name;
+    if(!selected || !c.per[selected]){
+      return heading('01','Jogadores') + '<div class="pa-cards">' + c.list.map(function(p){ return playerCard(p, 'data-player="'+esc(p.name)+'"'); }).join('') + '</div>';
+    }
     var p = c.per[selected];
-    var rankPos = c.list.filter(function(x){ return x.ranked; }).indexOf(p) + 1;
-    var h = '<div class="profile-head"><select id="psel">'
+    var h = '<div class="pa-toolbar"><button class="pa-btn pa-btn--ghost" data-act="back">← Todos</button><select class="pa-select" id="psel">'
       + c.list.map(function(x){ return '<option value="'+esc(x.name)+'"'+(x.name===selected?' selected':'')+'>'+esc(x.name)+'</option>'; }).join('')
-      + '</select>' + (p.ranked ? '<span class="tag">#'+rankPos+' no ranking</span>' : '<span class="tag">provisório</span>') + '</div>';
-    h += '<div class="stats">'
-      + '<div class="card"><div class="v score">'+f1(p.score)+'</div><div class="l">Nota</div></div>'
-      + '<div class="card"><div class="v">'+p.n+'</div><div class="l">Partidas</div></div>'
-      + '<div class="card"><div class="v">'+f2(p.kd)+'</div><div class="l">K/D médio</div></div>'
-      + '<div class="card"><div class="v">'+f2(p.totalKD)+'</div><div class="l">K/D total</div></div>'
-      + '<div class="card"><div class="v">'+pct(p.wr)+'</div><div class="l">Vitórias</div></div>'
-      + '<div class="card"><div class="v">'+f1(p.k/p.n)+'</div><div class="l">Kills/partida</div></div>'
-      + '<div class="card"><div class="v">'+f1(p.d/p.n)+'</div><div class="l">Deaths/partida</div></div>'
-      + '<div class="card"><div class="v">'+p.best.k+'/'+p.best.d+'</div><div class="l">Melhor partida</div></div>'
-      + '</div>';
-    h += '<div class="chart"><div class="l note" style="margin-bottom:6px">K/D por partida (teto '+CAP+')</div>'+spark(p.hist)+'</div>';
-    h += '<p class="note">Últimas partidas</p><div class="tablebox"><table><thead><tr><th>Mapa</th><th>Placar</th><th>K</th><th>D</th><th>Resultado</th></tr></thead><tbody>';
+      + '</select></div>' + playerCard(p) + '<div class="pa-gap" style="height:24px"></div>';
+    h += '<div class="pa-stats">'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">K/D total</span><span class="pa-label">01</span></div><span class="pa-stat__value">'+f2(p.totalKD)+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">K/D médio</span><span class="pa-label">02</span></div><span class="pa-stat__value">'+f2(p.kd)+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Kills / partida</span><span class="pa-label">03</span></div><span class="pa-stat__value">'+f1(p.k/p.n)+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Deaths / partida</span><span class="pa-label">04</span></div><span class="pa-stat__value">'+f1(p.d/p.n)+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Melhor partida</span><span class="pa-label">05</span></div><span class="pa-stat__value">'+p.best.k+'–'+p.best.d+'</span></div>'
+      + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Assistências</span><span class="pa-label">06</span></div><span class="pa-stat__value">'+p.a+'</span></div>'
+      + '</div><div class="pa-gap"></div>';
+    h += heading('02','K/D por partida') + '<div class="pa-chart">'+spark(p.hist)+'</div><div class="pa-gap"></div>';
+    h += heading('03','Últimas partidas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label">Mapa</th><th class="pa-label">Placar</th><th class="pa-label">K</th><th class="pa-label">D</th><th class="pa-label">Resultado</th></tr></thead><tbody>';
     p.hist.slice().reverse().slice(0,10).forEach(function(x){
-      h += '<tr><td>'+esc(x.map||'')+(x.date?' · '+fdate(x.date):'')+'</td><td>'+x.placar+'</td><td>'+x.k+'</td><td>'+x.d+'</td><td class="'+(x.res==='W'?'win':'loss')+'">'+(x.res==='W'?'V':'D')+'</td></tr>';
+      h += '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(x.map||'')+'</span>'+(x.date?' <span class="pa-caption">'+fdate(x.date)+'</span>':'')+'</td><td class="pa-num" style="text-align:left">'+x.placar+'</td><td class="pa-num">'+x.k+'</td><td class="pa-num">'+x.d+'</td><td><span class="pa-pip pa-pip--'+(x.res==='W'?'v':'d')+'">'+(x.res==='W'?'V':'D')+'</span></td></tr>';
     });
-    h += '</tbody></table></div>';
-    return h;
+    return h + '</tbody></table></div>';
   }
 
   function spark(hist){
-    var W = Math.max(320, hist.length*44), H = 140, pad = 24;
+    var W = Math.max(640, hist.length*52), H = 160, pad = 28;
     var max = CAP, n = hist.length;
     function X(i){ return n===1 ? W/2 : pad + i*(W-2*pad)/(n-1); }
     function Y(v){ return H - pad - (v/max)*(H-2*pad); }
     var pts = hist.map(function(x,i){ return X(i)+','+Y(x.kd); }).join(' ');
     var svg = '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="K/D por partida">';
-    svg += '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+Y(1)+'" y2="'+Y(1)+'" stroke="var(--border)" stroke-dasharray="4 4"/>';
-    svg += '<text x="4" y="'+(Y(1)+4)+'" font-size="10" fill="var(--muted)">1,0</text>';
+    svg += '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+Y(1)+'" y2="'+Y(1)+'" stroke="var(--line-strong)" stroke-dasharray="4 4"/>';
+    svg += '<text x="4" y="'+(Y(1)+4)+'" font-size="11" fill="var(--ink-faint)" font-family="IBM Plex Mono, monospace">1,0</text>';
     if(n>1) svg += '<polyline fill="none" stroke="var(--accent)" stroke-width="2" points="'+pts+'"/>';
     hist.forEach(function(x,i){
-      svg += '<circle cx="'+X(i)+'" cy="'+Y(x.kd)+'" r="4" fill="'+(x.res==='W'?'var(--good)':'var(--bad)')+'"><title>'+esc(x.map||'')+' · '+x.k+'/'+x.d+'</title></circle>';
+      svg += '<circle cx="'+X(i)+'" cy="'+Y(x.kd)+'" r="5" fill="'+(x.res==='W'?'var(--win)':'var(--loss)')+'"><title>'+esc(x.map||'')+' · '+x.k+'–'+x.d+'</title></circle>';
     });
-    return svg + '</svg><div class="note">Ponto verde = vitória, vermelho = derrota</div>';
+    return svg + '</svg><div class="pa-caption">Verde = vitória (V), vermelho = derrota (D). Linha tracejada = K/D 1,0.</div>';
   }
 
   function vHow(c){
-    return '<div class="formula"><p>Pra ninguém subir no ranking por sorte de uma partida só, a nota ajusta o desempenho pela <b>quantidade de partidas</b>.</p><ol>'
+    var rows = [['champions','Top 3 do ranking oficial'],['diamond','Nota ≥ 54'],['emerald','52 – 53,9'],['platinum','50 – 51,9'],['gold','48 – 49,9'],['silver','46 – 47,9'],['bronze','44 – 45,9'],['copper','Nota < 44'],['unranked','menos de '+MIN+' partidas']];
+    return heading('01','Como funciona') + '<div class="pa-panel"><p>Pra ninguém subir no ranking por sorte de uma partida só, a nota ajusta o desempenho pela <b>quantidade de partidas</b>.</p><ol>'
       + '<li><b>K/D por partida</b> tem teto de <code>'+CAP+'</code>, e 0 deaths conta como 1 death. Assim um 30/0 não distorce tudo.</li>'
       + '<li><b>Vitória</b> é do time do jogador: vence quem fez mais rounds na partida.</li>'
-      + '<li><b>Ajuste:</b> <code>KD_aj = média_grupo + (KD_jogador − média_grupo) × n / (n + '+M+')</code>, e o mesmo vale pra taxa de vitórias. Com poucas partidas o jogador fica perto da média do grupo, e com muitas partidas o desempenho real conta quase todo.</li>'
+      + '<li><b>K/D aj.</b> (K/D ajustado): <code>média_grupo + (KD_jogador − média_grupo) × n / (n + '+M+')</code>. O mesmo vale pra taxa de vitórias. Com poucas partidas o jogador fica perto da média do grupo, e com muitas o desempenho real conta quase todo.</li>'
       + '<li><b>Nota final (0–100):</b> <code>100 × ('+WK+' × min(KD_aj / 2, 1) + '+WW+' × WR_aj)</code>. K/D pesa 60% e vitórias 40%.</li>'
-      + '<li><b>Mínimo de '+MIN+' partidas</b> pra entrar no ranking oficial. Quem tem menos aparece como provisório.</li></ol>'
-      + '<p class="note">Médias atuais do grupo: K/D '+f2(c.avgKD)+' · vitórias '+pct(c.avgWR)+'.</p></div>';
+      + '<li><b>Mínimo de '+MIN+' partidas</b> pra entrar no ranking oficial. Quem tem menos fica Unranked, em placement.</li></ol>'
+      + '<p class="pa-caption">Médias atuais do grupo: K/D '+f2(c.avgKD)+' · vitórias '+pct(c.avgWR)+'.</p>'
+      + '<div class="pa-tiers">'+rows.map(function(r){ return '<div>'+emblem(r[0],'sm')+tierBadge(r[0])+'<span class="pa-caption">'+r[1]+'</span></div>'; }).join('')+'</div></div>';
   }
 
   function prow(){
-    return '<div class="prow"><input class="pn" list="plist" placeholder="Jogador"><input class="pk" type="number" min="0" placeholder="K"><input class="pd" type="number" min="0" placeholder="D"><input class="pa" type="number" min="0" placeholder="A"><button type="button" class="btn small danger" data-act="rm-row">✕</button></div>';
+    return '<div class="pa-prow"><input class="pa-input pn" list="plist" placeholder="Jogador"><input class="pa-input pk" type="number" min="0" placeholder="K"><input class="pa-input pd" type="number" min="0" placeholder="D"><input class="pa-input pa" type="number" min="0" placeholder="A"><button type="button" class="pa-btn pa-btn--ghost pa-btn--sm pa-btn--danger" data-act="rm-row">✕</button></div>';
   }
-  function tblock(i){
-    return '<div class="tblock" data-team="'+i+'"><div class="thead">Time '+i+' · rounds <input class="ts" type="number" min="0"></div><div class="rows">'+prow()+prow()+prow()+prow()+prow()+'</div><button type="button" class="btn small" data-act="add-row">+ Jogador</button></div>';
+  function tblock(i, name){
+    return '<div class="pa-tblock" data-team="'+i+'"><div class="pa-tblock__head"><span class="pa-label">'+name+'</span><span class="pa-label">Rounds</span><input class="pa-input ts" type="number" min="0"></div><div class="rows">'+prow()+prow()+prow()+prow()+prow()+'</div><button type="button" class="pa-btn pa-btn--ghost pa-btn--sm" data-act="add-row">+ Jogador</button></div>';
   }
 
   function vAdmin(){
-    return '<div class="formula"><b>Lançar partida</b><div class="form-grid" style="margin-top:12px">'
-      + '<label>Data (opcional)<input id="f-date" type="date"></label>'
-      + '<label>Mapa<input id="f-map" list="maplist" placeholder="Ex.: Clube"></label></div>'
+    return heading('01','Lançar partida') + '<div class="pa-panel"><div class="pa-fields">'
+      + '<label class="pa-field"><span class="pa-label">Data (opcional)</span><input class="pa-input" id="f-date" type="date"></label>'
+      + '<label class="pa-field"><span class="pa-label">Mapa</span><input class="pa-input" id="f-map" list="maplist" placeholder="Ex.: Clube"></label></div>'
       + '<datalist id="maplist">'+MAPS.map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
       + '<datalist id="plist">'+knownPlayers().map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
-      + tblock(1) + tblock(2)
-      + '<button class="btn primary" data-act="save-match">Salvar partida</button>'
-      + '<p class="note" id="f-msg"></p></div>';
+      + tblock(1,'Orange Team') + tblock(2,'Blue Team')
+      + '<button class="pa-btn" data-act="save-match">Salvar partida</button>'
+      + '<p class="pa-caption" id="f-msg" style="margin-top:12px"></p></div>';
   }
 
   function bind(){
     var app = document.getElementById('app');
-    Array.prototype.forEach.call(app.querySelectorAll('[data-view]'), function(b){ b.onclick = function(){ view = b.getAttribute('data-view'); render(); }; });
-    Array.prototype.forEach.call(app.querySelectorAll('[data-player]'), function(r){ r.onclick = function(){ selected = r.getAttribute('data-player'); view = 'player'; render(); }; });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-view]'), function(b){ b.onclick = function(){ view = b.getAttribute('data-view'); if(view==='player') selected = null; render(); }; });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-player]'), function(r){ r.onclick = function(){ selected = r.getAttribute('data-player'); view = 'player'; render(); window.scrollTo(0,0); }; });
     var sel = document.getElementById('psel'); if(sel) sel.onchange = function(){ selected = sel.value; render(); };
     Array.prototype.forEach.call(app.querySelectorAll('[data-act]'), function(b){
       b.onclick = function(){
         var a = b.getAttribute('data-act');
         if(a==='add-row'){ b.parentNode.querySelector('.rows').insertAdjacentHTML('beforeend', prow()); bind(); }
         else if(a==='rm-row'){ b.parentNode.remove(); }
+        else if(a==='back'){ selected = null; render(); }
         else if(a==='save-match'){ saveMatch(); }
       };
     });
@@ -326,10 +584,10 @@ select,input{font:inherit;background:var(--surface);color:var(--text);border:1px
 
   function saveMatch(){
     var msg = document.getElementById('f-msg'), teams = [], seen = {}, bad = false;
-    Array.prototype.forEach.call(document.querySelectorAll('.tblock'), function(tb){
+    Array.prototype.forEach.call(document.querySelectorAll('.pa-tblock'), function(tb){
       var score = tb.querySelector('.ts').value, players = [];
       if(score===''){ bad = true; return; }
-      Array.prototype.forEach.call(tb.querySelectorAll('.prow'), function(r){
+      Array.prototype.forEach.call(tb.querySelectorAll('.pa-prow'), function(r){
         var n = r.querySelector('.pn').value.trim(), k = r.querySelector('.pk').value, d = r.querySelector('.pd').value, a = r.querySelector('.pa').value;
         if(!n && k==='' && d==='') return;
         if(!n || k==='' || d==='' || seen[n.toLowerCase()]){ bad = true; return; }

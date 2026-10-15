@@ -316,7 +316,7 @@ body{margin:0}
 
   function compute(d){
     var per = {}, totPM = 0, sumKD = 0, wins = 0;
-    var ms = d.matches.slice().sort(function(a,b){ var x=a.date||'', y=b.date||''; return x<y?-1:(x>y?1:0); });
+    var ms = d.matches.slice();
     ms.forEach(function(m){
       m.teams.forEach(function(t, ti){
         var opp = m.teams[1-ti], won = t.score > opp.score;

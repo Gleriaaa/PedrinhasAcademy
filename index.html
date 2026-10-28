@@ -290,6 +290,10 @@ body{margin:0}
 .pa-tiers div{display:flex;align-items:center;gap:var(--space-2);justify-content:space-between;background:var(--bg-200);padding:6px var(--space-3)}
 .pa-tab{white-space:nowrap}
 .pa-tabs{overflow-x:auto;flex-wrap:nowrap}
+
+.pa-trendcell{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.pa-trend{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.02em}
+.pa-trend--up{color:var(--win)}.pa-trend--down{color:var(--loss)}.pa-trend--flat{color:var(--ink-faint)}.pa-trend--new{color:var(--accent);text-transform:uppercase;font-size:10px}
 </style>
 </head>
 <body class="pa-app">
@@ -314,9 +318,8 @@ body{margin:0}
   function fdate(s){ if(!s) return ''; var p=s.split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : s; }
   function pad2(n){ return (n<10?'0':'')+n; }
 
-  function compute(d){
+  function core(ms){
     var per = {}, totPM = 0, sumKD = 0, wins = 0;
-    var ms = d.matches.slice();
     ms.forEach(function(m){
       m.teams.forEach(function(t, ti){
         var opp = m.teams[1-ti], won = t.score > opp.score;
@@ -353,6 +356,33 @@ body{margin:0}
       if(p.ranked){ pos++; p.pos = pos; p.tier = tierOf(p.score, pos); } else { p.pos = 0; p.tier = 'unranked'; }
     });
     return {list:list, per:per, avgKD:avgKD, avgWR:avgWR, matches:ms};
+  }
+
+  var TREND = 3;
+  function compute(d){
+    var ms = d.matches.slice(), c = core(ms), N = ms.length, snaps = [];
+    for(var i=1;i<=N;i++){
+      var s = core(ms.slice(0,i)), mp = {};
+      s.list.forEach(function(p){ mp[p.name] = {score:p.score, pos:p.pos, n:p.n}; });
+      snaps.push(mp);
+    }
+    c.list.forEach(function(p){
+      p.evo = [];
+      ms.forEach(function(m, i){
+        var inM = m.teams.some(function(t){ return t.players.some(function(s){ return s.p === p.name; }); });
+        if(inM && snaps[i][p.name]) p.evo.push({m:i+1, score:snaps[i][p.name].score, pos:snaps[i][p.name].pos, n:snaps[i][p.name].n});
+      });
+      p.move = null; p.dScore = null;
+      if(N > TREND){
+        var prev = snaps[N-1-TREND][p.name];
+        p.dScore = prev ? p.score - prev.score : null;
+        if(p.ranked){
+          if(!prev || !prev.pos) p.move = 'new';
+          else p.move = prev.pos - p.pos;
+        }
+      }
+    });
+    return c;
   }
 
   function tierOf(score, pos){
@@ -423,16 +453,16 @@ body{margin:0}
     if(!c.list.length) return emptyBox();
     var h = podium(c);
     // Tabela Win/KD
-    h += heading('02','Ranking Win/KD') + '<div class="pa-table-wrap"><table class="pa-table"><thead><tr><th class="pa-label">#</th><th class="pa-label">Jogador</th><th class="pa-label">Nota</th><th class="pa-label">Partidas</th><th class="pa-label">K/D</th><th class="pa-label">Win %</th><th class="pa-label">K/D aj.</th></tr></thead><tbody>';
+    h += heading('02','Ranking Win/KD') + '<div class="pa-table-wrap"><table class="pa-table"><thead><tr><th class="pa-label">#</th><th class="pa-label">Jogador</th><th class="pa-label">Nota</th><th class="pa-label">Partidas</th><th class="pa-label">K/D</th><th class="pa-label">Win %</th><th class="pa-label">K/D aj.</th><th class="pa-label">Tendência</th></tr></thead><tbody>';
     var shown = false;
     c.list.forEach(function(p){
-      if(!p.ranked && !shown){ shown = true; h += '<tr class="pa-divider"><td colspan="7" class="pa-label">Unranked · em placement, menos de '+MIN+' partidas · fora do ranking oficial</td></tr>'; }
+      if(!p.ranked && !shown){ shown = true; h += '<tr class="pa-divider"><td colspan="8" class="pa-label">Unranked · em placement, menos de '+MIN+' partidas · fora do ranking oficial</td></tr>'; }
       h += '<tr class="pa-row pa-click'+(p.ranked && p.pos<=3?' pa-row--podium':'')+(p.ranked?'':' pa-row--prov')+'" data-player="'+esc(p.name)+'"><td class="pa-pos">'+(p.ranked?pad2(p.pos):'—')+'</td>'
         + '<td>'+playerCell(p, true)+'</td>'
         + '<td><span class="pa-nota"><span class="pa-bar"><span style="width:'+Math.min(100,p.score).toFixed(1)+'%"></span></span><span class="pa-nota__value">'+f1(p.score)+'</span></span></td>'
-        + '<td class="pa-num">'+p.n+'</td><td class="pa-num">'+f2(p.kd)+'</td><td class="pa-num'+(p.wr>=0.5?' pa-good':'')+'">'+pct(p.wr)+'</td><td class="pa-num pa-adj">'+f2(p.kdAdj)+'</td></tr>';
+        + '<td class="pa-num">'+p.n+'</td><td class="pa-num">'+f2(p.kd)+'</td><td class="pa-num'+(p.wr>=0.5?' pa-good':'')+'">'+pct(p.wr)+'</td><td class="pa-num pa-adj">'+f2(p.kdAdj)+'</td><td>'+trendCell(p)+'</td></tr>';
     });
-    h += '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Nota = K/D, vitórias e partidas jogadas. Top 3 = Champions; abaixo, o rank vem da Nota. Com menos de '+MIN+' partidas o jogador fica Unranked, em placement. Clique num jogador pra ver o perfil.</p><div class="pa-gap"></div>';
+    h += '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Nota = K/D, vitórias e partidas jogadas. Top 3 = Champions; abaixo, o rank vem da Nota. Com menos de '+MIN+' partidas o jogador fica Unranked, em placement. Tendência: movimento de posição nas últimas '+TREND+' partidas lançadas (▲ subiu, ▼ caiu) e a evolução da nota. Clique num jogador pra ver o perfil e o gráfico completo.</p><div class="pa-gap"></div>';
     // Tabela só Kill/Death
     var l = c.list.slice().sort(function(a,b){
       if(a.ranked !== b.ranked) return a.ranked ? -1 : 1;
@@ -505,7 +535,9 @@ body{margin:0}
       + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Assistências</span><span class="pa-label">06</span></div><span class="pa-stat__value">'+p.a+'</span></div>'
       + '</div><div class="pa-gap"></div>';
     h += heading('02','K/D por partida') + '<div class="pa-chart">'+spark(p.hist)+'</div><div class="pa-gap"></div>';
-    h += heading('03','Últimas partidas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label">Mapa</th><th class="pa-label">Placar</th><th class="pa-label">K</th><th class="pa-label">D</th><th class="pa-label">Resultado</th></tr></thead><tbody>';
+    h += heading('03','Evolução da nota') + '<div class="pa-chart">'+evoChart(p,'score')+'</div><div class="pa-gap"></div>';
+    h += heading('04','Posição no ranking') + '<div class="pa-chart">'+evoChart(p,'pos')+'</div><div class="pa-gap"></div>';
+    h += heading('05','Últimas partidas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label">Mapa</th><th class="pa-label">Placar</th><th class="pa-label">K</th><th class="pa-label">D</th><th class="pa-label">Resultado</th></tr></thead><tbody>';
     p.hist.slice().reverse().slice(0,10).forEach(function(x){
       h += '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(x.map||'')+'</span>'+(x.date?' <span class="pa-caption">'+fdate(x.date)+'</span>':'')+'</td><td class="pa-num" style="text-align:left">'+x.placar+'</td><td class="pa-num">'+x.k+'</td><td class="pa-num">'+x.d+'</td><td><span class="pa-pip pa-pip--'+(x.res==='W'?'v':'d')+'">'+(x.res==='W'?'V':'D')+'</span></td></tr>';
     });
@@ -526,6 +558,55 @@ body{margin:0}
       svg += '<circle cx="'+X(i)+'" cy="'+Y(x.kd)+'" r="5" fill="'+(x.res==='W'?'var(--win)':'var(--loss)')+'"><title>'+esc(x.map||'')+' · '+x.k+'–'+x.d+'</title></circle>';
     });
     return svg + '</svg><div class="pa-caption">Verde = vitória (V), vermelho = derrota (D). Linha tracejada = K/D 1,0.</div>';
+  }
+
+  function trendTag(p){
+    if(p.move === null) return '';
+    if(p.move === 'new') return '<span class="pa-trend pa-trend--new">novo</span>';
+    if(p.move > 0) return '<span class="pa-trend pa-trend--up">▲ '+p.move+'</span>';
+    if(p.move < 0) return '<span class="pa-trend pa-trend--down">▼ '+(-p.move)+'</span>';
+    return '<span class="pa-trend pa-trend--flat">=</span>';
+  }
+  function trendCell(p){
+    var e = p.evo.slice(-8), n = e.length;
+    var out = '<span class="pa-trendcell">';
+    if(n >= 2){
+      var mn = Infinity, mx = -Infinity; e.forEach(function(x){ mn = Math.min(mn,x.score); mx = Math.max(mx,x.score); });
+      var rg = Math.max(mx-mn, 2), W = 76, H = 24, pd = 3;
+      var pts = e.map(function(x,i){ return (pd + i*(W-2*pd)/(n-1)).toFixed(1)+','+(H-pd-((x.score-mn)/rg)*(H-2*pd)).toFixed(1); }).join(' ');
+      var up = e[n-1].score - e[0].score, col = up > 0.05 ? 'var(--win)' : (up < -0.05 ? 'var(--loss)' : 'var(--ink-faint)');
+      var last = pts.split(' ').pop().split(',');
+      out += '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" aria-label="Evolução da nota"><polyline fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" points="'+pts+'"/><circle cx="'+last[0]+'" cy="'+last[1]+'" r="3" fill="'+col+'"/></svg>';
+    }
+    return out + trendTag(p) + '</span>';
+  }
+
+  function evoChart(p, mode){
+    var pts = p.evo.filter(function(x){ return mode === 'pos' ? x.pos > 0 : true; });
+    if(!pts.length) return '<div class="pa-caption">'+(mode==='pos' ? 'Ainda sem posição oficial: o jogador entra no ranking com '+MIN+' partidas.' : 'Sem dados ainda.')+'</div>';
+    var n = pts.length, W = Math.max(640, n*52), H = 190, pl = 46, pr = 18, pt = 18, pb = 26;
+    var vals = pts.map(function(x){ return mode === 'pos' ? x.pos : x.score; });
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+    if(mode === 'pos'){ lo = 1; hi = Math.max(hi, 3); } else { lo = Math.floor(lo - 1); hi = Math.ceil(hi + 1); }
+    function X(i){ return n === 1 ? W/2 : pl + i*(W-pl-pr)/(n-1); }
+    function Y(v){ var t = (v-lo)/(hi-lo || 1); return mode === 'pos' ? pt + t*(H-pt-pb) : H - pb - t*(H-pt-pb); }
+    var svg = '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(mode==='pos'?'Posição no ranking':'Evolução da nota')+'">';
+    if(mode === 'pos'){
+      for(var g = 1; g <= hi; g++) svg += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="var(--line)"/><text x="4" y="'+(Y(g)+4)+'" font-size="11" fill="var(--ink-faint)" font-family="IBM Plex Mono, monospace">#'+g+'</text>';
+    } else {
+      [[44,'bronze'],[46,'silver'],[48,'gold'],[50,'platinum'],[52,'emerald'],[54,'diamond']].forEach(function(t){
+        if(t[0] > lo && t[0] < hi) svg += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(t[0])+'" y2="'+Y(t[0])+'" stroke="var(--line-strong)" stroke-dasharray="4 4"/><text x="4" y="'+(Y(t[0])+4)+'" font-size="11" fill="var(--ink-faint)" font-family="IBM Plex Mono, monospace">'+t[0]+'</text>';
+      });
+    }
+    var line = pts.map(function(x,i){ return X(i).toFixed(1)+','+Y(mode==='pos'?x.pos:x.score).toFixed(1); }).join(' ');
+    if(n > 1) svg += '<polyline fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" points="'+line+'"/>';
+    pts.forEach(function(x,i){
+      var h = p.hist[p.evo.indexOf(x)], w = h && h.res === 'W', placing = x.n < MIN;
+      svg += '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(mode==='pos'?x.pos:x.score).toFixed(1)+'" r="5" fill="'+(placing ? 'var(--bg, #0b0d10)' : (w?'var(--win)':'var(--loss)'))+'" stroke="'+(w?'var(--win)':'var(--loss)')+'" stroke-width="2"><title>Partida '+x.m+(h?' · '+esc(h.map||'')+' · '+h.k+'–'+h.d:'')+' · '+(mode==='pos' ? '#'+x.pos : 'nota '+f1(x.score))+'</title></circle>';
+      if(i === n-1) svg += '<text x="'+(X(i)-4)+'" y="'+(Y(mode==='pos'?x.pos:x.score)-10)+'" text-anchor="end" font-size="12" font-weight="600" fill="var(--ink)" font-family="IBM Plex Mono, monospace">'+(mode==='pos'?'#'+x.pos:f1(x.score))+'</text>';
+    });
+    svg += '</svg>';
+    return svg + '<div class="pa-caption">'+(mode==='pos' ? 'Posição no ranking oficial depois de cada partida dele (#1 no topo).' : 'Nota depois de cada partida dele. Bolinha vazada = ainda em placement (menos de '+MIN+' partidas). Verde = vitória, vermelho = derrota. Linhas tracejadas = faixas de rank.')+'</div>';
   }
 
   function vHow(c){

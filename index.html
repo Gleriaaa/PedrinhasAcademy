@@ -294,6 +294,8 @@ body{margin:0}
 .pa-trendcell{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .pa-trend{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.02em}
 .pa-trend--up{color:var(--win)}.pa-trend--down{color:var(--loss)}.pa-trend--flat{color:var(--ink-faint)}.pa-trend--new{color:var(--accent);text-transform:uppercase;font-size:10px}
+
+.pa-alist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:6px}.pa-alist li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border:1px solid var(--line);font-size:14px}
 </style>
 </head>
 <body class="pa-app">
@@ -301,10 +303,11 @@ body{margin:0}
   <div id="app"></div>
 </div>
 
-<script type="application/json" id="state">{"matches": [{"id": "m01", "map": "Café Dostoiévski", "teams": [{"score": 7, "players": [{"p": "gmartinssr", "k": 14, "d": 5, "a": 2}, {"p": "DeppinBoy", "k": 12, "d": 6, "a": 3}, {"p": "IAlphaDarkl", "k": 6, "d": 6, "a": 2}, {"p": "YyKaiser", "k": 7, "d": 10, "a": 2}, {"p": "hnrqq", "k": 4, "d": 10, "a": 3}]}, {"score": 4, "players": [{"p": "Jhow.WOE", "k": 15, "d": 9, "a": 3}, {"p": "rodourado", "k": 7, "d": 9, "a": 2}, {"p": "GaviaoDelas", "k": 8, "d": 9, "a": 1}, {"p": "C4piV4ra.M4nC4", "k": 3, "d": 9, "a": 1}, {"p": "Paladin.Gx", "k": 4, "d": 7, "a": 2}]}]}, {"id": "m02", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "DeppinBoy", "k": 10, "d": 8, "a": 3}, {"p": "YyKaiser", "k": 10, "d": 10, "a": 3}, {"p": "gmartinssr", "k": 10, "d": 8, "a": 0}, {"p": "hnrqq", "k": 10, "d": 12, "a": 2}, {"p": "IAlphaDarkl", "k": 6, "d": 9, "a": 1}]}, {"score": 6, "players": [{"p": "Tus4k0_Tamusho", "k": 17, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 14, "d": 9, "a": 3}, {"p": "Paladin.Gx", "k": 9, "d": 11, "a": 5}, {"p": "OvercastJet7172", "k": 4, "d": 9, "a": 4}, {"p": "Jhow.WOE", "k": 3, "d": 11, "a": 2}]}]}, {"id": "m03", "map": "Fronteira", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 16, "d": 5, "a": 2}, {"p": "YyKaiser", "k": 7, "d": 5, "a": 3}, {"p": "Jhow.WOE", "k": 12, "d": 3, "a": 2}, {"p": "rodourado", "k": 3, "d": 5, "a": 4}, {"p": "OvercastJet7172", "k": 3, "d": 2, "a": 2}]}, {"score": 2, "players": [{"p": "Paladin.Gx", "k": 9, "d": 8, "a": 1}, {"p": "TheFodsbiel", "k": 6, "d": 8, "a": 2}, {"p": "IAlphaDarkl", "k": 0, "d": 8, "a": 4}, {"p": "DeppinBoy", "k": 2, "d": 9, "a": 1}, {"p": "Steuguh_", "k": 2, "d": 8, "a": 1}]}]}, {"id": "m04", "map": "Avião Presidencial", "teams": [{"score": 5, "players": [{"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "Paladin.Gx", "k": 9, "d": 11, "a": 1}, {"p": "rodourado", "k": 6, "d": 7, "a": 1}, {"p": "durinhodematar", "k": 6, "d": 10, "a": 2}, {"p": "GaviaoDelas", "k": 4, "d": 10, "a": 2}]}, {"score": 7, "players": [{"p": "YyKaiser", "k": 14, "d": 9, "a": 5}, {"p": "OvercastJet7172", "k": 9, "d": 5, "a": 4}, {"p": "hnrqq", "k": 12, "d": 6, "a": 2}, {"p": "IAlphaDarkl", "k": 7, "d": 7, "a": 2}, {"p": "TheFodsbiel", "k": 5, "d": 9, "a": 1}]}]}, {"id": "m05", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 12, "d": 7, "a": 5}, {"p": "C4piV4ra.M4nC4", "k": 9, "d": 8, "a": 3}, {"p": "Paladin.Gx", "k": 11, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 9, "d": 9, "a": 3}, {"p": "rodourado", "k": 2, "d": 7, "a": 1}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 14, "d": 8, "a": 3}, {"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "durinhodematar", "k": 6, "d": 7, "a": 0}, {"p": "TheFodsbiel", "k": 6, "d": 10, "a": 2}, {"p": "Steuguh_", "k": 1, "d": 9, "a": 2}]}]}, {"id": "m06", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "Jhow.WOE", "k": 17, "d": 4, "a": 2}, {"p": "OvercastJet7172", "k": 8, "d": 1, "a": 0}, {"p": "Steuguh_", "k": 6, "d": 6, "a": 4}, {"p": "DeppinBoy", "k": 4, "d": 5, "a": 3}, {"p": "durinhodematar", "k": 2, "d": 4, "a": 3}]}, {"score": 1, "players": [{"p": "rodourado", "k": 8, "d": 8, "a": 1}, {"p": "IAlphaDarkl", "k": 4, "d": 7, "a": 1}, {"p": "TheFodsbiel", "k": 6, "d": 7, "a": 0}, {"p": "GaviaoDelas", "k": 1, "d": 8, "a": 2}, {"p": "dinhoreis7", "k": 1, "d": 7, "a": 1}]}]}, {"id": "m07", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 16, "d": 8, "a": 4}, {"p": "YyKaiser", "k": 18, "d": 7, "a": 2}, {"p": "IAlphaDarkl", "k": 8, "d": 6, "a": 4}, {"p": "Steuguh_", "k": 5, "d": 8, "a": 1}, {"p": "durinhodematar", "k": 2, "d": 6, "a": 1}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 9, "d": 10, "a": 3}, {"p": "rodourado", "k": 6, "d": 10, "a": 3}, {"p": "DeppinBoy", "k": 6, "d": 9, "a": 6}, {"p": "TheFodsbiel", "k": 9, "d": 10, "a": 3}, {"p": "dinhoreis7", "k": 5, "d": 10, "a": 0}]}]}, {"id": "m08", "map": "Laboratórios Nighthaven", "note": "Time derrotado com 4 jogadores no print (um saiu do jogo).", "teams": [{"score": 7, "players": [{"p": "Jhow.WOE", "k": 17, "d": 6, "a": 4}, {"p": "DeppinBoy", "k": 8, "d": 5, "a": 2}, {"p": "Steuguh_", "k": 8, "d": 7, "a": 2}, {"p": "TheFodsbiel", "k": 2, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 3, "d": 4, "a": 0}]}, {"score": 3, "players": [{"p": "GaviaoDelas", "k": 15, "d": 8, "a": 2}, {"p": "YyKaiser", "k": 11, "d": 7, "a": 2}, {"p": "IAlphaDarkl", "k": 4, "d": 9, "a": 0}, {"p": "rodourado", "k": 1, "d": 8, "a": 4}]}]}, {"id": "m09", "map": "Oregon", "teams": [{"score": 6, "players": [{"p": "GaviaoDelas", "k": 11, "d": 10, "a": 3}, {"p": "Jhow.WOE", "k": 13, "d": 10, "a": 0}, {"p": "rodourado", "k": 6, "d": 10, "a": 2}, {"p": "Steuguh_", "k": 9, "d": 12, "a": 2}, {"p": "IAlphaDarkl", "k": 5, "d": 12, "a": 0}]}, {"score": 8, "players": [{"p": "Paladin.Gx", "k": 15, "d": 7, "a": 3}, {"p": "YyKaiser", "k": 13, "d": 10, "a": 3}, {"p": "OvercastJet7172", "k": 11, "d": 8, "a": 1}, {"p": "DeppinBoy", "k": 10, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 5, "d": 10, "a": 4}]}]}, {"id": "m10", "map": "Laboratórios Nighthaven", "teams": [{"score": 7, "players": [{"p": "rodourado", "k": 14, "d": 9, "a": 1}, {"p": "Tus4k0_Tamusho", "k": 11, "d": 11, "a": 1}, {"p": "GaviaoDelas", "k": 9, "d": 10, "a": 1}, {"p": "durinhodematar", "k": 5, "d": 8, "a": 5}, {"p": "AIRFLEX_WOE", "k": 7, "d": 8, "a": 2}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 15, "d": 9, "a": 4}, {"p": "IAlphaDarkl", "k": 11, "d": 7, "a": 4}, {"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "TheFodsbiel", "k": 8, "d": 10, "a": 2}, {"p": "cl9_clebao67", "k": 1, "d": 11, "a": 0}]}]}, {"id": "m11", "map": "Fortaleza", "note": "Print inclinado (modo replay): alguns números podem ter pequena imprecisão.", "teams": [{"score": 6, "players": [{"p": "Jhow.WOE", "k": 17, "d": 10, "a": 1}, {"p": "IAlphaDarkl", "k": 11, "d": 11, "a": 5}, {"p": "DeppinBoy", "k": 10, "d": 10, "a": 6}, {"p": "TheFodsbiel", "k": 7, "d": 11, "a": 8}, {"p": "cl9_clebao67", "k": 0, "d": 13, "a": 2}]}, {"score": 8, "players": [{"p": "Tus4k0_Tamusho", "k": 23, "d": 7, "a": 3}, {"p": "GaviaoDelas", "k": 10, "d": 11, "a": 3}, {"p": "rodourado", "k": 11, "d": 10, "a": 2}, {"p": "durinhodematar", "k": 7, "d": 7, "a": 0}, {"p": "AIRFLEX_WOE", "k": 3, "d": 10, "a": 2}]}]}, {"id": "m12", "map": "Banco", "teams": [{"score": 5, "players": [{"p": "GaviaoDelas", "k": 15, "d": 8, "a": 0}, {"p": "hnrqq", "k": 11, "d": 9, "a": 3}, {"p": "Tus4k0_Tamusho", "k": 5, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 5, "d": 7, "a": 3}, {"p": "IAlphaDarkl", "k": 4, "d": 8, "a": 1}]}, {"score": 7, "players": [{"p": "YyKaiser", "k": 9, "d": 8, "a": 5}, {"p": "DeppinBoy", "k": 10, "d": 10, "a": 3}, {"p": "yNavarro_", "k": 9, "d": 6, "a": 2}, {"p": "Jhow.WOE", "k": 7, "d": 9, "a": 2}, {"p": "Paladin.Gx", "k": 6, "d": 7, "a": 3}]}]}, {"id": "m13", "map": "Café Dostoiévski", "date": "2026-10-07", "note": "Stats informadas à mão (sem print): sem assistências.", "teams": [{"score": 5, "players": [{"p": "GaviaoDelas", "k": 12, "d": 9, "a": 0}, {"p": "hnrqq", "k": 4, "d": 11, "a": 0}, {"p": "IAlphaDarkl", "k": 5, "d": 7, "a": 0}, {"p": "durinhodematar", "k": 7, "d": 9, "a": 0}, {"p": "Tus4k0_Tamusho", "k": 12, "d": 8, "a": 0}]}, {"score": 7, "players": [{"p": "DeppinBoy", "k": 15, "d": 8, "a": 0}, {"p": "yNavarro_", "k": 2, "d": 8, "a": 0}, {"p": "YyKaiser", "k": 9, "d": 8, "a": 0}, {"p": "Jhow.WOE", "k": 12, "d": 6, "a": 0}, {"p": "Paladin.Gx", "k": 7, "d": 9, "a": 0}]}]}, {"id": "m14", "map": "Fronteira", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 13, "d": 5, "a": 3}, {"p": "DeppinBoy", "k": 11, "d": 3, "a": 4}, {"p": "Sr.Xerequinha", "k": 5, "d": 8, "a": 3}, {"p": "IAlphaDarkl", "k": 5, "d": 4, "a": 2}, {"p": "AIRFLEX_WOE", "k": 3, "d": 7, "a": 3}]}, {"score": 1, "players": [{"p": "GaviaoDelas", "k": 10, "d": 7, "a": 1}, {"p": "rodourado", "k": 5, "d": 7, "a": 2}, {"p": "OvercastJet7172", "k": 6, "d": 7, "a": 2}, {"p": "Jhow.WOE", "k": 4, "d": 8, "a": 1}, {"p": "TheFodsbiel", "k": 2, "d": 8, "a": 3}]}]}, {"id": "m15", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 14, "d": 8, "a": 2}, {"p": "Jhow.WOE", "k": 12, "d": 10, "a": 5}, {"p": "OvercastJet7172", "k": 8, "d": 6, "a": 2}, {"p": "TheFodsbiel", "k": 2, "d": 9, "a": 4}, {"p": "rodourado", "k": 2, "d": 7, "a": 0}]}, {"score": 5, "players": [{"p": "Tus4k0_Tamusho", "k": 15, "d": 7, "a": 1}, {"p": "DeppinBoy", "k": 7, "d": 8, "a": 4}, {"p": "IAlphaDarkl", "k": 7, "d": 6, "a": 3}, {"p": "Sr.Xerequinha", "k": 8, "d": 10, "a": 3}, {"p": "AIRFLEX_WOE", "k": 3, "d": 8, "a": 4}]}]}, {"id": "m16", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 12, "d": 4, "a": 2}, {"p": "GaviaoDelas", "k": 11, "d": 3, "a": 1}, {"p": "YyKaiser", "k": 6, "d": 5, "a": 8}, {"p": "DeppinBoy", "k": 7, "d": 3, "a": 0}, {"p": "IAlphaDarkl", "k": 1, "d": 5, "a": 3}]}, {"score": 1, "players": [{"p": "AIRFLEX_WOE", "k": 6, "d": 8, "a": 0}, {"p": "Paladin.Gx", "k": 5, "d": 8, "a": 2}, {"p": "igordx.", "k": 6, "d": 7, "a": 0}, {"p": "Sr.Xerequinha", "k": 1, "d": 8, "a": 2}]}]}, {"id": "m17", "map": "Laboratórios Nighthaven", "note": "Print parcial (6x1, rodada 7) — atualizar com o placar final", "teams": [{"score": 6, "players": [{"p": "DeppinBoy", "k": 12, "d": 3, "a": 2}, {"p": "OvercastJet7172", "k": 7, "d": 1, "a": 2}, {"p": "AIRFLEX_WOE", "k": 5, "d": 2, "a": 2}, {"p": "Paladin.Gx", "k": 6, "d": 3, "a": 1}, {"p": "Jhow.WOE", "k": 4, "d": 4, "a": 2}]}, {"score": 1, "players": [{"p": "durinhodematar", "k": 3, "d": 7, "a": 1}, {"p": "IAlphaDarkl", "k": 0, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 3, "d": 6, "a": 2}, {"p": "Steuguh_", "k": 3, "d": 7, "a": 1}, {"p": "dooly_011", "k": 4, "d": 7, "a": 0}]}]}, {"id": "m18", "map": "Laboratórios Nighthaven", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 13, "d": 7, "a": 0}, {"p": "OvercastJet7172", "k": 8, "d": 5, "a": 2}, {"p": "Jhow.WOE", "k": 7, "d": 8, "a": 4}, {"p": "GaviaoDelas", "k": 6, "d": 8, "a": 2}, {"p": "AIRFLEX_WOE", "k": 7, "d": 10, "a": 1}]}, {"score": 4, "players": [{"p": "Paladin.Gx", "k": 11, "d": 9, "a": 6}, {"p": "C4piV4ra.M4nC4", "k": 8, "d": 8, "a": 1}, {"p": "IAlphaDarkl", "k": 7, "d": 7, "a": 3}, {"p": "DeppinBoy", "k": 7, "d": 9, "a": 4}, {"p": "TheFodsbiel", "k": 4, "d": 8, "a": 1}]}]}, {"id": "m19", "map": "Fortaleza", "teams": [{"score": 8, "players": [{"p": "Jhow.WOE", "k": 16, "d": 10, "a": 2}, {"p": "GaviaoDelas", "k": 14, "d": 12, "a": 2}, {"p": "Tus4k0_Tamusho", "k": 15, "d": 11, "a": 3}, {"p": "OvercastJet7172", "k": 8, "d": 7, "a": 4}, {"p": "AIRFLEX_WOE", "k": 6, "d": 12, "a": 0}]}, {"score": 7, "players": [{"p": "DeppinBoy", "k": 22, "d": 10, "a": 3}, {"p": "Paladin.Gx", "k": 13, "d": 11, "a": 4}, {"p": "C4piV4ra.M4nC4", "k": 7, "d": 14, "a": 3}, {"p": "IAlphaDarkl", "k": 6, "d": 10, "a": 2}, {"p": "TheFodsbiel", "k": 4, "d": 14, "a": 3}]}]}, {"id": "m20", "map": "Café Dostoiévski", "teams": [{"score": 8, "players": [{"p": "Jhow.WOE", "k": 15, "d": 10, "a": 4}, {"p": "DeppinBoy", "k": 14, "d": 10, "a": 2}, {"p": "YyKaiser", "k": 12, "d": 11, "a": 2}, {"p": "Steuguh_", "k": 7, "d": 10, "a": 8}, {"p": "AIRFLEX_WOE", "k": 1, "d": 12, "a": 7}]}, {"score": 7, "players": [{"p": "Paladin.Gx", "k": 14, "d": 11, "a": 2}, {"p": "Tus4k0_Tamusho", "k": 11, "d": 9, "a": 1}, {"p": "IAlphaDarkl", "k": 7, "d": 8, "a": 10}, {"p": "rodourado", "k": 10, "d": 10, "a": 4}, {"p": "GaviaoDelas", "k": 10, "d": 11, "a": 5}]}]}]}</script>
+<script type="application/json" id="state">{"matches": [{"id": "m01", "map": "Café Dostoiévski", "teams": [{"score": 7, "players": [{"p": "gmartinssr", "k": 14, "d": 5, "a": 2}, {"p": "DeppinBoy", "k": 12, "d": 6, "a": 3}, {"p": "IAlphaDarkl", "k": 6, "d": 6, "a": 2}, {"p": "YyKaiser", "k": 7, "d": 10, "a": 2}, {"p": "hnrqq", "k": 4, "d": 10, "a": 3}]}, {"score": 4, "players": [{"p": "Jhow.WOE", "k": 15, "d": 9, "a": 3}, {"p": "rodourado", "k": 7, "d": 9, "a": 2}, {"p": "GaviaoDelas", "k": 8, "d": 9, "a": 1}, {"p": "C4piV4ra.M4nC4", "k": 3, "d": 9, "a": 1}, {"p": "Paladin.Gx", "k": 4, "d": 7, "a": 2}]}]}, {"id": "m02", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "DeppinBoy", "k": 10, "d": 8, "a": 3}, {"p": "YyKaiser", "k": 10, "d": 10, "a": 3}, {"p": "gmartinssr", "k": 10, "d": 8, "a": 0}, {"p": "hnrqq", "k": 10, "d": 12, "a": 2}, {"p": "IAlphaDarkl", "k": 6, "d": 9, "a": 1}]}, {"score": 6, "players": [{"p": "Tus4k0_Tamusho", "k": 17, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 14, "d": 9, "a": 3}, {"p": "Paladin.Gx", "k": 9, "d": 11, "a": 5}, {"p": "OvercastJet7172", "k": 4, "d": 9, "a": 4}, {"p": "Jhow.WOE", "k": 3, "d": 11, "a": 2}]}]}, {"id": "m03", "map": "Fronteira", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 16, "d": 5, "a": 2}, {"p": "YyKaiser", "k": 7, "d": 5, "a": 3}, {"p": "Jhow.WOE", "k": 12, "d": 3, "a": 2}, {"p": "rodourado", "k": 3, "d": 5, "a": 4}, {"p": "OvercastJet7172", "k": 3, "d": 2, "a": 2}]}, {"score": 2, "players": [{"p": "Paladin.Gx", "k": 9, "d": 8, "a": 1}, {"p": "TheFodsbiel", "k": 6, "d": 8, "a": 2}, {"p": "IAlphaDarkl", "k": 0, "d": 8, "a": 4}, {"p": "DeppinBoy", "k": 2, "d": 9, "a": 1}, {"p": "Steuguh_", "k": 2, "d": 8, "a": 1}]}]}, {"id": "m04", "map": "Avião Presidencial", "teams": [{"score": 5, "players": [{"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "Paladin.Gx", "k": 9, "d": 11, "a": 1}, {"p": "rodourado", "k": 6, "d": 7, "a": 1}, {"p": "durinhodematar", "k": 6, "d": 10, "a": 2}, {"p": "GaviaoDelas", "k": 4, "d": 10, "a": 2}]}, {"score": 7, "players": [{"p": "YyKaiser", "k": 14, "d": 9, "a": 5}, {"p": "OvercastJet7172", "k": 9, "d": 5, "a": 4}, {"p": "hnrqq", "k": 12, "d": 6, "a": 2}, {"p": "IAlphaDarkl", "k": 7, "d": 7, "a": 2}, {"p": "TheFodsbiel", "k": 5, "d": 9, "a": 1}]}]}, {"id": "m05", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 12, "d": 7, "a": 5}, {"p": "C4piV4ra.M4nC4", "k": 9, "d": 8, "a": 3}, {"p": "Paladin.Gx", "k": 11, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 9, "d": 9, "a": 3}, {"p": "rodourado", "k": 2, "d": 7, "a": 1}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 14, "d": 8, "a": 3}, {"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "durinhodematar", "k": 6, "d": 7, "a": 0}, {"p": "TheFodsbiel", "k": 6, "d": 10, "a": 2}, {"p": "Steuguh_", "k": 1, "d": 9, "a": 2}]}]}, {"id": "m06", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "Jhow.WOE", "k": 17, "d": 4, "a": 2}, {"p": "OvercastJet7172", "k": 8, "d": 1, "a": 0}, {"p": "Steuguh_", "k": 6, "d": 6, "a": 4}, {"p": "DeppinBoy", "k": 4, "d": 5, "a": 3}, {"p": "durinhodematar", "k": 2, "d": 4, "a": 3}]}, {"score": 1, "players": [{"p": "rodourado", "k": 8, "d": 8, "a": 1}, {"p": "IAlphaDarkl", "k": 4, "d": 7, "a": 1}, {"p": "TheFodsbiel", "k": 6, "d": 7, "a": 0}, {"p": "GaviaoDelas", "k": 1, "d": 8, "a": 2}, {"p": "dinhoreis7", "k": 1, "d": 7, "a": 1}]}]}, {"id": "m07", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 16, "d": 8, "a": 4}, {"p": "YyKaiser", "k": 18, "d": 7, "a": 2}, {"p": "IAlphaDarkl", "k": 8, "d": 6, "a": 4}, {"p": "Steuguh_", "k": 5, "d": 8, "a": 1}, {"p": "durinhodematar", "k": 2, "d": 6, "a": 1}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 9, "d": 10, "a": 3}, {"p": "rodourado", "k": 6, "d": 10, "a": 3}, {"p": "DeppinBoy", "k": 6, "d": 9, "a": 6}, {"p": "TheFodsbiel", "k": 9, "d": 10, "a": 3}, {"p": "dinhoreis7", "k": 5, "d": 10, "a": 0}]}]}, {"id": "m08", "map": "Laboratórios Nighthaven", "note": "Time derrotado com 4 jogadores no print (um saiu do jogo).", "teams": [{"score": 7, "players": [{"p": "Jhow.WOE", "k": 17, "d": 6, "a": 4}, {"p": "DeppinBoy", "k": 8, "d": 5, "a": 2}, {"p": "Steuguh_", "k": 8, "d": 7, "a": 2}, {"p": "TheFodsbiel", "k": 2, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 3, "d": 4, "a": 0}]}, {"score": 3, "players": [{"p": "GaviaoDelas", "k": 15, "d": 8, "a": 2}, {"p": "YyKaiser", "k": 11, "d": 7, "a": 2}, {"p": "IAlphaDarkl", "k": 4, "d": 9, "a": 0}, {"p": "rodourado", "k": 1, "d": 8, "a": 4}]}]}, {"id": "m09", "map": "Oregon", "teams": [{"score": 6, "players": [{"p": "GaviaoDelas", "k": 11, "d": 10, "a": 3}, {"p": "Jhow.WOE", "k": 13, "d": 10, "a": 0}, {"p": "rodourado", "k": 6, "d": 10, "a": 2}, {"p": "Steuguh_", "k": 9, "d": 12, "a": 2}, {"p": "IAlphaDarkl", "k": 5, "d": 12, "a": 0}]}, {"score": 8, "players": [{"p": "Paladin.Gx", "k": 15, "d": 7, "a": 3}, {"p": "YyKaiser", "k": 13, "d": 10, "a": 3}, {"p": "OvercastJet7172", "k": 11, "d": 8, "a": 1}, {"p": "DeppinBoy", "k": 10, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 5, "d": 10, "a": 4}]}]}, {"id": "m10", "map": "Laboratórios Nighthaven", "teams": [{"score": 7, "players": [{"p": "rodourado", "k": 14, "d": 9, "a": 1}, {"p": "Tus4k0_Tamusho", "k": 11, "d": 11, "a": 1}, {"p": "GaviaoDelas", "k": 9, "d": 10, "a": 1}, {"p": "durinhodematar", "k": 5, "d": 8, "a": 5}, {"p": "AIRFLEX_WOE", "k": 7, "d": 8, "a": 2}]}, {"score": 5, "players": [{"p": "Jhow.WOE", "k": 15, "d": 9, "a": 4}, {"p": "IAlphaDarkl", "k": 11, "d": 7, "a": 4}, {"p": "DeppinBoy", "k": 11, "d": 9, "a": 3}, {"p": "TheFodsbiel", "k": 8, "d": 10, "a": 2}, {"p": "cl9_clebao67", "k": 1, "d": 11, "a": 0}]}]}, {"id": "m11", "map": "Fortaleza", "note": "Print inclinado (modo replay): alguns números podem ter pequena imprecisão.", "teams": [{"score": 6, "players": [{"p": "Jhow.WOE", "k": 17, "d": 10, "a": 1}, {"p": "IAlphaDarkl", "k": 11, "d": 11, "a": 5}, {"p": "DeppinBoy", "k": 10, "d": 10, "a": 6}, {"p": "TheFodsbiel", "k": 7, "d": 11, "a": 8}, {"p": "cl9_clebao67", "k": 0, "d": 13, "a": 2}]}, {"score": 8, "players": [{"p": "Tus4k0_Tamusho", "k": 23, "d": 7, "a": 3}, {"p": "GaviaoDelas", "k": 10, "d": 11, "a": 3}, {"p": "rodourado", "k": 11, "d": 10, "a": 2}, {"p": "durinhodematar", "k": 7, "d": 7, "a": 0}, {"p": "AIRFLEX_WOE", "k": 3, "d": 10, "a": 2}]}]}, {"id": "m12", "map": "Banco", "teams": [{"score": 5, "players": [{"p": "GaviaoDelas", "k": 15, "d": 8, "a": 0}, {"p": "hnrqq", "k": 11, "d": 9, "a": 3}, {"p": "Tus4k0_Tamusho", "k": 5, "d": 9, "a": 2}, {"p": "durinhodematar", "k": 5, "d": 7, "a": 3}, {"p": "IAlphaDarkl", "k": 4, "d": 8, "a": 1}]}, {"score": 7, "players": [{"p": "YyKaiser", "k": 9, "d": 8, "a": 5}, {"p": "DeppinBoy", "k": 10, "d": 10, "a": 3}, {"p": "yNavarro_", "k": 9, "d": 6, "a": 2}, {"p": "Jhow.WOE", "k": 7, "d": 9, "a": 2}, {"p": "Paladin.Gx", "k": 6, "d": 7, "a": 3}]}]}, {"id": "m13", "map": "Café Dostoiévski", "date": "2026-10-07", "note": "Stats informadas à mão (sem print): sem assistências.", "teams": [{"score": 5, "players": [{"p": "GaviaoDelas", "k": 12, "d": 9, "a": 0}, {"p": "hnrqq", "k": 4, "d": 11, "a": 0}, {"p": "IAlphaDarkl", "k": 5, "d": 7, "a": 0}, {"p": "durinhodematar", "k": 7, "d": 9, "a": 0}, {"p": "Tus4k0_Tamusho", "k": 12, "d": 8, "a": 0}]}, {"score": 7, "players": [{"p": "DeppinBoy", "k": 15, "d": 8, "a": 0}, {"p": "yNavarro_", "k": 2, "d": 8, "a": 0}, {"p": "YyKaiser", "k": 9, "d": 8, "a": 0}, {"p": "Jhow.WOE", "k": 12, "d": 6, "a": 0}, {"p": "Paladin.Gx", "k": 7, "d": 9, "a": 0}]}]}, {"id": "m14", "map": "Fronteira", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 13, "d": 5, "a": 3}, {"p": "DeppinBoy", "k": 11, "d": 3, "a": 4}, {"p": "Sr.Xerequinha", "k": 5, "d": 8, "a": 3}, {"p": "IAlphaDarkl", "k": 5, "d": 4, "a": 2}, {"p": "AIRFLEX_WOE", "k": 3, "d": 7, "a": 3}]}, {"score": 1, "players": [{"p": "GaviaoDelas", "k": 10, "d": 7, "a": 1}, {"p": "rodourado", "k": 5, "d": 7, "a": 2}, {"p": "OvercastJet7172", "k": 6, "d": 7, "a": 2}, {"p": "Jhow.WOE", "k": 4, "d": 8, "a": 1}, {"p": "TheFodsbiel", "k": 2, "d": 8, "a": 3}]}]}, {"id": "m15", "map": "Clube", "teams": [{"score": 7, "players": [{"p": "GaviaoDelas", "k": 14, "d": 8, "a": 2}, {"p": "Jhow.WOE", "k": 12, "d": 10, "a": 5}, {"p": "OvercastJet7172", "k": 8, "d": 6, "a": 2}, {"p": "TheFodsbiel", "k": 2, "d": 9, "a": 4}, {"p": "rodourado", "k": 2, "d": 7, "a": 0}]}, {"score": 5, "players": [{"p": "Tus4k0_Tamusho", "k": 15, "d": 7, "a": 1}, {"p": "DeppinBoy", "k": 7, "d": 8, "a": 4}, {"p": "IAlphaDarkl", "k": 7, "d": 6, "a": 3}, {"p": "Sr.Xerequinha", "k": 8, "d": 10, "a": 3}, {"p": "AIRFLEX_WOE", "k": 3, "d": 8, "a": 4}]}]}, {"id": "m16", "map": "Chalé", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 12, "d": 4, "a": 2}, {"p": "GaviaoDelas", "k": 11, "d": 3, "a": 1}, {"p": "YyKaiser", "k": 6, "d": 5, "a": 8}, {"p": "DeppinBoy", "k": 7, "d": 3, "a": 0}, {"p": "IAlphaDarkl", "k": 1, "d": 5, "a": 3}]}, {"score": 1, "players": [{"p": "AIRFLEX_WOE", "k": 6, "d": 8, "a": 0}, {"p": "Paladin.Gx", "k": 5, "d": 8, "a": 2}, {"p": "igordx.", "k": 6, "d": 7, "a": 0}, {"p": "Sr.Xerequinha", "k": 1, "d": 8, "a": 2}]}]}, {"id": "m17", "map": "Laboratórios Nighthaven", "note": "Print parcial (6x1, rodada 7) — atualizar com o placar final", "teams": [{"score": 6, "players": [{"p": "DeppinBoy", "k": 12, "d": 3, "a": 2}, {"p": "OvercastJet7172", "k": 7, "d": 1, "a": 2}, {"p": "AIRFLEX_WOE", "k": 5, "d": 2, "a": 2}, {"p": "Paladin.Gx", "k": 6, "d": 3, "a": 1}, {"p": "Jhow.WOE", "k": 4, "d": 4, "a": 2}]}, {"score": 1, "players": [{"p": "durinhodematar", "k": 3, "d": 7, "a": 1}, {"p": "IAlphaDarkl", "k": 0, "d": 7, "a": 2}, {"p": "GaviaoDelas", "k": 3, "d": 6, "a": 2}, {"p": "Steuguh_", "k": 3, "d": 7, "a": 1}, {"p": "dooly_011", "k": 4, "d": 7, "a": 0}]}]}, {"id": "m18", "map": "Laboratórios Nighthaven", "teams": [{"score": 7, "players": [{"p": "Tus4k0_Tamusho", "k": 13, "d": 7, "a": 0}, {"p": "OvercastJet7172", "k": 8, "d": 5, "a": 2}, {"p": "Jhow.WOE", "k": 7, "d": 8, "a": 4}, {"p": "GaviaoDelas", "k": 6, "d": 8, "a": 2}, {"p": "AIRFLEX_WOE", "k": 7, "d": 10, "a": 1}]}, {"score": 4, "players": [{"p": "Paladin.Gx", "k": 11, "d": 9, "a": 6}, {"p": "C4piV4ra.M4nC4", "k": 8, "d": 8, "a": 1}, {"p": "IAlphaDarkl", "k": 7, "d": 7, "a": 3}, {"p": "DeppinBoy", "k": 7, "d": 9, "a": 4}, {"p": "TheFodsbiel", "k": 4, "d": 8, "a": 1}]}]}, {"id": "m19", "map": "Fortaleza", "teams": [{"score": 8, "players": [{"p": "Jhow.WOE", "k": 16, "d": 10, "a": 2}, {"p": "GaviaoDelas", "k": 14, "d": 12, "a": 2}, {"p": "Tus4k0_Tamusho", "k": 15, "d": 11, "a": 3}, {"p": "OvercastJet7172", "k": 8, "d": 7, "a": 4}, {"p": "AIRFLEX_WOE", "k": 6, "d": 12, "a": 0}]}, {"score": 7, "players": [{"p": "DeppinBoy", "k": 22, "d": 10, "a": 3}, {"p": "Paladin.Gx", "k": 13, "d": 11, "a": 4}, {"p": "C4piV4ra.M4nC4", "k": 7, "d": 14, "a": 3}, {"p": "IAlphaDarkl", "k": 6, "d": 10, "a": 2}, {"p": "TheFodsbiel", "k": 4, "d": 14, "a": 3}]}]}, {"id": "m20", "map": "Café Dostoiévski", "teams": [{"score": 8, "players": [{"p": "Jhow.WOE", "k": 15, "d": 10, "a": 4}, {"p": "DeppinBoy", "k": 14, "d": 10, "a": 2}, {"p": "YyKaiser", "k": 12, "d": 11, "a": 2}, {"p": "Steuguh_", "k": 7, "d": 10, "a": 8}, {"p": "AIRFLEX_WOE", "k": 1, "d": 12, "a": 7}]}, {"score": 7, "players": [{"p": "Paladin.Gx", "k": 14, "d": 11, "a": 2}, {"p": "Tus4k0_Tamusho", "k": 11, "d": 9, "a": 1}, {"p": "IAlphaDarkl", "k": 7, "d": 8, "a": 10}, {"p": "rodourado", "k": 10, "d": 10, "a": 4}, {"p": "GaviaoDelas", "k": 10, "d": 11, "a": 5}]}]}], "aliases": {"paladincexo": "Paladin.Gx", "pala": "Paladin.Gx", "paladino": "Paladin.Gx", "galvas": "GaviaoDelas", "henrique": "hnrqq", "hnrq": "hnrqq", "felipe": "IAlphaDarkl", "glego": "durinhodematar", "vini": "Tus4k0_Tamusho", "vinni": "Tus4k0_Tamusho", "tus4ko": "Tus4k0_Tamusho", "deboy": "DeppinBoy", "navarro": "yNavarro_", "pedro": "YyKaiser", "jhow": "Jhow.WOE"}}</script>
 <script>
 (function(){
   var STATE = JSON.parse(document.getElementById('state').textContent);
+  if(!STATE.aliases) STATE.aliases = {};
   var view = 'ranking', selected = null;
   var isOwner = false, artifact = null;
   var CAP = 3, M = 10, MIN = 5, WK = 0.6, WW = 0.4;
@@ -418,12 +421,13 @@ body{margin:0}
       + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Operadores</span><span class="pa-label">02</span></div><span class="pa-stat__value">'+c.list.length+'</span></div>'
       + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Kills totais</span><span class="pa-label">03</span></div><span class="pa-stat__value">'+totalK+'</span></div>'
       + '</div><div class="pa-gap" style="height:24px"></div>';
-    var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['how','Como funciona']];
+    var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['highlights','Destaques'],['how','Como funciona']];
     if(isOwner && artifact) tabs.push(['admin','+ Lançar partida']);
     h += '<nav class="pa-tabs" role="tablist">' + tabs.map(function(t){ return '<button class="pa-tab" role="tab" data-view="'+t[0]+'" aria-selected="'+(view===t[0])+'">'+t[1]+'</button>'; }).join('') + '</nav><div class="pa-gap"></div>';
     if(view==='ranking') h += vRanking(c);
     else if(view==='matches') h += vMatches(c, d);
     else if(view==='player') h += vPlayer(c);
+    else if(view==='highlights') h += vHighlights(c);
     else if(view==='how') h += vHow(c);
     else if(view==='admin') h += vAdmin();
     app.innerHTML = h;
@@ -537,7 +541,8 @@ body{margin:0}
     h += heading('02','K/D por partida') + '<div class="pa-chart">'+spark(p.hist)+'</div><div class="pa-gap"></div>';
     h += heading('03','Evolução da nota') + '<div class="pa-chart">'+evoChart(p,'score')+'</div><div class="pa-gap"></div>';
     h += heading('04','Posição no ranking') + '<div class="pa-chart">'+evoChart(p,'pos')+'</div><div class="pa-gap"></div>';
-    h += heading('05','Últimas partidas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label">Mapa</th><th class="pa-label">Placar</th><th class="pa-label">K</th><th class="pa-label">D</th><th class="pa-label">Resultado</th></tr></thead><tbody>';
+    h += playerExtras(c, p);
+    h += heading('07','Últimas partidas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label">Mapa</th><th class="pa-label">Placar</th><th class="pa-label">K</th><th class="pa-label">D</th><th class="pa-label">Resultado</th></tr></thead><tbody>';
     p.hist.slice().reverse().slice(0,10).forEach(function(x){
       h += '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(x.map||'')+'</span>'+(x.date?' <span class="pa-caption">'+fdate(x.date)+'</span>':'')+'</td><td class="pa-num" style="text-align:left">'+x.placar+'</td><td class="pa-num">'+x.k+'</td><td class="pa-num">'+x.d+'</td><td><span class="pa-pip pa-pip--'+(x.res==='W'?'v':'d')+'">'+(x.res==='W'?'V':'D')+'</span></td></tr>';
     });
@@ -558,6 +563,143 @@ body{margin:0}
       svg += '<circle cx="'+X(i)+'" cy="'+Y(x.kd)+'" r="5" fill="'+(x.res==='W'?'var(--win)':'var(--loss)')+'"><title>'+esc(x.map||'')+' · '+x.k+'–'+x.d+'</title></circle>';
     });
     return svg + '</svg><div class="pa-caption">Verde = vitória (V), vermelho = derrota (D). Linha tracejada = K/D 1,0.</div>';
+  }
+
+  function canon(raw){
+    var n = String(raw||'').trim(), l = n.toLowerCase();
+    if(STATE.aliases[l]) return STATE.aliases[l];
+    var kn = knownPlayers();
+    for(var i=0;i<kn.length;i++) if(kn[i].toLowerCase() === l) return kn[i];
+    return n;
+  }
+
+  function pairStats(ms){
+    var P = {};
+    ms.forEach(function(m){
+      m.teams.forEach(function(t, ti){
+        var won = t.score > m.teams[1-ti].score, names = t.players.map(function(s){ return s.p; }).sort();
+        for(var i=0;i<names.length;i++) for(var j=i+1;j<names.length;j++){
+          var k = names[i]+'|'+names[j];
+          var o = P[k] || (P[k] = {a:names[i], b:names[j], n:0, w:0});
+          o.n++; if(won) o.w++;
+        }
+      });
+    });
+    return Object.keys(P).map(function(k){ var o = P[k]; o.wr = o.w/o.n; o.adj = (o.w+2)/(o.n+4); return o; });
+  }
+
+  function mapGroup(c){
+    var G = {};
+    c.matches.forEach(function(m){
+      var key = m.map || 'Mapa não informado', g = G[key] || (G[key] = {map:key, n:0, pl:{}});
+      g.n++;
+      m.teams.forEach(function(t){ t.players.forEach(function(s){
+        var o = g.pl[s.p] || (g.pl[s.p] = {name:s.p, n:0, k:0, d:0}); o.n++; o.k += s.k; o.d += s.d;
+      }); });
+    });
+    return Object.keys(G).map(function(k){
+      var g = G[k], best = null;
+      Object.keys(g.pl).forEach(function(n){ var o = g.pl[n]; if(o.n < 2) return; o.kd = o.k/Math.max(o.d,1); if(!best || o.kd > best.kd) best = o; });
+      g.king = best; return g;
+    }).sort(function(a,b){ return b.n - a.n; });
+  }
+
+  function records(c){
+    var r = {k:null, sal:null, a:null, ws:null, ls:null, up:null, dn:null, busy:null};
+    c.matches.forEach(function(m,i){ m.teams.forEach(function(t){ t.players.forEach(function(s){
+      var it = {p:s.p, k:s.k, d:s.d, a:s.a||0, map:m.map||'', i:i+1};
+      if(!r.k || s.k > r.k.k) r.k = it;
+      if(!r.sal || s.k-s.d > r.sal.k-r.sal.d) r.sal = it;
+      if(!r.a || it.a > r.a.a) r.a = it;
+    }); }); });
+    c.list.forEach(function(p){
+      var w = 0, l = 0;
+      p.hist.forEach(function(x){
+        if(x.res === 'W'){ w++; l = 0; if(!r.ws || w > r.ws.n) r.ws = {p:p.name, n:w}; }
+        else { l++; w = 0; if(!r.ls || l > r.ls.n) r.ls = {p:p.name, n:l}; }
+      });
+      if(p.dScore !== null){
+        if(!r.up || p.dScore > r.up.v) r.up = {p:p.name, v:p.dScore};
+        if(!r.dn || p.dScore < r.dn.v) r.dn = {p:p.name, v:p.dScore};
+      }
+      if(!r.busy || p.n > r.busy.n) r.busy = {p:p.name, n:p.n};
+    });
+    return r;
+  }
+
+  function statBox(label, num, value, sub){
+    return '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">'+label+'</span><span class="pa-label">'+num+'</span></div><span class="pa-stat__value">'+value+'</span><span class="pa-caption">'+sub+'</span></div>';
+  }
+
+  function pairRows(list){
+    return list.map(function(o){
+      return '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(o.a)+' + '+esc(o.b)+'</span></td><td class="pa-num">'+o.n+'</td><td class="pa-num">'+o.w+' – '+(o.n-o.w)+'</td><td class="pa-num'+(o.wr>=0.5?' pa-good':'')+'">'+pct(o.wr)+'</td></tr>';
+    }).join('');
+  }
+
+  function vHighlights(c){
+    if(!c.matches.length) return emptyBox();
+    var r = records(c), boxes = [], i = 0;
+    function add(label, value, sub){ i++; boxes.push(statBox(label, pad2(i), value, sub)); }
+    add('Mais kills (partida)', r.k.k, esc(r.k.p)+' · '+esc(r.k.map)+' (partida '+r.k.i+')');
+    add('Melhor saldo K–D', '+'+(r.sal.k-r.sal.d), esc(r.sal.p)+' · '+r.sal.k+'–'+r.sal.d+' · '+esc(r.sal.map));
+    add('Mais assistências', r.a.a, esc(r.a.p)+' · '+esc(r.a.map)+' (partida '+r.a.i+')');
+    add('Seq. de vitórias', r.ws.n, esc(r.ws.p));
+    add('Seq. de derrotas', r.ls.n, esc(r.ls.p));
+    add('Mais partidas', r.busy.n, esc(r.busy.p));
+    if(r.up && r.up.v > 0) add('Em alta', '+'+f1(r.up.v), esc(r.up.p)+' · nota nas últimas '+TREND+' partidas');
+    if(r.dn && r.dn.v < 0) add('Em queda', f1(r.dn.v), esc(r.dn.p)+' · nota nas últimas '+TREND+' partidas');
+    var h = heading('01','Recordes') + '<div class="pa-stats">'+boxes.join('')+'</div><div class="pa-gap"></div>';
+    var ps = pairStats(c.matches).filter(function(o){ return o.n >= 4; });
+    ps.sort(function(a,b){ return b.adj - a.adj || b.n - a.n; });
+    var best = ps.slice(0,8), rest = ps.slice(8), worst = rest.slice(-5).reverse();
+    var thead = '<thead><tr><th class="pa-label" style="text-align:left">Dupla</th><th class="pa-label">Jogos</th><th class="pa-label">V – D</th><th class="pa-label">Win %</th></tr></thead>';
+    h += heading('02','Melhores duplas');
+    if(!best.length) h += '<div class="pa-empty">Ainda não tem dupla com 4 partidas juntas.</div>';
+    else h += '<div class="pa-table-wrap"><table class="pa-table" style="min-width:420px">'+thead+'<tbody>'+pairRows(best)+'</tbody></table></div>';
+    if(worst.length) h += '<div class="pa-gap" style="height:16px"></div>' + heading('03','Duplas que mais sofrem') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:420px">'+thead+'<tbody>'+pairRows(worst)+'</tbody></table></div>';
+    h += '<p class="pa-caption" style="margin-top:12px">Só entram duplas com pelo menos 4 partidas no mesmo time. A ordem leva em conta a quantidade de jogos, pra uma dupla com 2 vitórias em 2 não passar na frente.</p><div class="pa-gap"></div>';
+    var mg = mapGroup(c);
+    h += heading(worst.length ? '04' : '03','Mapas') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:520px"><thead><tr><th class="pa-label" style="text-align:left">Mapa</th><th class="pa-label">Partidas</th><th class="pa-label" style="text-align:left">Rei do mapa</th><th class="pa-label">K/D</th></tr></thead><tbody>'
+      + mg.map(function(g){
+        return '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(g.map)+'</span></td><td class="pa-num">'+g.n+'</td>'
+          + (g.king ? '<td style="text-align:left">'+esc(g.king.name)+' <span class="pa-caption">('+g.king.n+' jogos)</span></td><td class="pa-num pa-good">'+f2(g.king.kd)+'</td>' : '<td style="text-align:left"><span class="pa-caption">precisa de 2 jogos no mapa</span></td><td class="pa-num">—</td>')
+          + '</tr>';
+      }).join('') + '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Rei do mapa = melhor K/D total entre quem jogou pelo menos 2 vezes nele.</p>';
+    return h;
+  }
+
+  function playerExtras(c, p){
+    var M2 = {};
+    p.hist.forEach(function(x){
+      var k = x.map || 'Mapa não informado', o = M2[k] || (M2[k] = {map:k, n:0, k:0, d:0, w:0});
+      o.n++; o.k += x.k; o.d += x.d; if(x.res === 'W') o.w++;
+    });
+    var ml = Object.keys(M2).map(function(k){ var o = M2[k]; o.kd = o.k/Math.max(o.d,1); o.wr = o.w/o.n; return o; }).sort(function(a,b){ return b.n - a.n || b.kd - a.kd; });
+    var h = heading('05','Por mapa') + '<div class="pa-table-wrap"><table class="pa-table" style="min-width:480px"><thead><tr><th class="pa-label" style="text-align:left">Mapa</th><th class="pa-label">Partidas</th><th class="pa-label">K/D</th><th class="pa-label">Win %</th></tr></thead><tbody>'
+      + ml.map(function(o){ return '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(o.map)+'</span></td><td class="pa-num">'+o.n+'</td><td class="pa-num">'+f2(o.kd)+'</td><td class="pa-num'+(o.wr>=0.5?' pa-good':'')+'">'+pct(o.wr)+'</td></tr>'; }).join('')
+      + '</tbody></table></div><div class="pa-gap"></div>';
+    var ps = pairStats(c.matches).filter(function(o){ return (o.a === p.name || o.b === p.name) && o.n >= 3; });
+    ps.sort(function(a,b){ return b.adj - a.adj || b.n - a.n; });
+    h += heading('06','Parceiros');
+    if(!ps.length) h += '<div class="pa-empty">Ainda não tem parceiro com 3 partidas juntas.</div>';
+    else h += '<div class="pa-table-wrap"><table class="pa-table" style="min-width:420px"><thead><tr><th class="pa-label" style="text-align:left">Parceiro</th><th class="pa-label">Jogos</th><th class="pa-label">V – D</th><th class="pa-label">Win %</th></tr></thead><tbody>'
+      + ps.slice(0,8).map(function(o){ return '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(o.a === p.name ? o.b : o.a)+'</span></td><td class="pa-num">'+o.n+'</td><td class="pa-num">'+o.w+' – '+(o.n-o.w)+'</td><td class="pa-num'+(o.wr>=0.5?' pa-good':'')+'">'+pct(o.wr)+'</td></tr>'; }).join('')
+      + '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Quando jogam no mesmo time (mínimo de 3 partidas juntos).</p>';
+    return h + '<div class="pa-gap"></div>';
+  }
+
+  function addAlias(){
+    var msg = document.getElementById('a-msg'), nick = document.getElementById('a-new').value.trim(), tgt = canon(document.getElementById('a-tgt').value);
+    if(!nick || !tgt){ msg.textContent = 'Preencha o apelido e o jogador oficial.'; return; }
+    if(nick.toLowerCase() === tgt.toLowerCase()){ msg.textContent = 'O apelido precisa ser diferente do nome oficial.'; return; }
+    if(knownPlayers().indexOf(tgt) < 0){ msg.textContent = 'O jogador oficial precisa já ter partida lançada.'; return; }
+    var clash = STATE.matches.some(function(m){ return m.teams.some(function(t){ var ns = t.players.map(function(s){ return s.p.toLowerCase(); }); return ns.indexOf(nick.toLowerCase()) >= 0 && ns.indexOf(tgt.toLowerCase()) >= 0; }); });
+    if(clash){ msg.textContent = 'Os dois nomes aparecem juntos numa mesma partida, então não são a mesma pessoa.'; return; }
+    STATE.aliases[nick.toLowerCase()] = tgt;
+    STATE.matches.forEach(function(m){ m.teams.forEach(function(t){ t.players.forEach(function(s){ if(s.p.toLowerCase() === nick.toLowerCase()) s.p = tgt; }); }); });
+    msg.textContent = 'Salvando...';
+    publish();
   }
 
   function trendTag(p){
@@ -633,10 +775,16 @@ body{margin:0}
       + '<label class="pa-field"><span class="pa-label">Data (opcional)</span><input class="pa-input" id="f-date" type="date"></label>'
       + '<label class="pa-field"><span class="pa-label">Mapa</span><input class="pa-input" id="f-map" list="maplist" placeholder="Ex.: Clube"></label></div>'
       + '<datalist id="maplist">'+MAPS.map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
-      + '<datalist id="plist">'+knownPlayers().map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
+      + '<datalist id="plist">'+knownPlayers().concat(Object.keys(STATE.aliases)).map(function(m){ return '<option value="'+esc(m)+'">'; }).join('')+'</datalist>'
       + tblock(1,'Orange Team') + tblock(2,'Blue Team')
       + '<button class="pa-btn" data-act="save-match">Salvar partida</button>'
-      + '<p class="pa-caption" id="f-msg" style="margin-top:12px"></p></div>';
+      + '<p class="pa-caption" id="f-msg" style="margin-top:12px"></p></div>'
+      + '<div class="pa-gap"></div>' + heading('02','Apelidos')
+      + '<div class="pa-panel"><p class="pa-caption">Quando alguém trocar de nick ou você quiser digitar um nome curto, cadastre aqui. O nome digitado vira o jogador oficial ao lançar partida. Se o nick novo já tiver partidas, elas são unidas ao oficial.</p>'
+      + '<div class="pa-fields"><label class="pa-field"><span class="pa-label">Apelido ou nick novo</span><input class="pa-input" id="a-new" placeholder="Ex.: Paladincexo"></label>'
+      + '<label class="pa-field"><span class="pa-label">Jogador oficial</span><input class="pa-input" id="a-tgt" list="plist" placeholder="Ex.: Paladin.Gx"></label></div>'
+      + '<button class="pa-btn" data-act="add-alias">Cadastrar apelido</button><p class="pa-caption" id="a-msg" style="margin-top:12px"></p>'
+      + '<ul class="pa-alist">' + Object.keys(STATE.aliases).sort().map(function(k){ return '<li><span><b>'+esc(k)+'</b> → '+esc(STATE.aliases[k])+'</span><button type="button" class="pa-btn pa-btn--ghost pa-btn--sm pa-btn--danger" data-ralias="'+esc(k)+'">✕</button></li>'; }).join('') + '</ul></div>';
   }
 
   function bind(){
@@ -651,7 +799,11 @@ body{margin:0}
         else if(a==='rm-row'){ b.parentNode.remove(); }
         else if(a==='back'){ selected = null; render(); }
         else if(a==='save-match'){ saveMatch(); }
+        else if(a==='add-alias'){ addAlias(); }
       };
+    });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-ralias]'), function(b){
+      b.onclick = function(){ delete STATE.aliases[b.getAttribute('data-ralias')]; publish(); };
     });
     Array.prototype.forEach.call(app.querySelectorAll('[data-del]'), function(b){
       b.onclick = function(){
@@ -669,7 +821,7 @@ body{margin:0}
       var score = tb.querySelector('.ts').value, players = [];
       if(score===''){ bad = true; return; }
       Array.prototype.forEach.call(tb.querySelectorAll('.pa-prow'), function(r){
-        var n = r.querySelector('.pn').value.trim(), k = r.querySelector('.pk').value, d = r.querySelector('.pd').value, a = r.querySelector('.pa').value;
+        var n = canon(r.querySelector('.pn').value), k = r.querySelector('.pk').value, d = r.querySelector('.pd').value, a = r.querySelector('.pa').value;
         if(!n && k==='' && d==='') return;
         if(!n || k==='' || d==='' || seen[n.toLowerCase()]){ bad = true; return; }
         seen[n.toLowerCase()] = 1;

@@ -296,6 +296,16 @@ body{margin:0}
 .pa-trend--up{color:var(--win)}.pa-trend--down{color:var(--loss)}.pa-trend--flat{color:var(--ink-faint)}.pa-trend--new{color:var(--accent);text-transform:uppercase;font-size:10px}
 
 .pa-alist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:6px}.pa-alist li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border:1px solid var(--line);font-size:14px}
+
+.pa-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.pa-chip{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;cursor:pointer;padding:8px 12px;background:var(--bg-100);border:1px solid var(--line);color:var(--ink-muted);font-family:var(--font-sans)}
+.pa-chip__n{font-weight:600;font-size:14px;color:inherit;word-break:break-all}
+.pa-chip__s{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint)}
+.pa-chip--1{border-color:var(--accent);color:var(--ink);background:var(--accent-glow)}
+.pa-chip--2{border-color:var(--defense);border-style:dashed;color:var(--ink)}
+.pa-chip:hover{border-color:var(--line-strong)}
+
+.pa-tab{padding:12px 14px;font-size:15px;letter-spacing:.07em;flex-shrink:0}
 </style>
 </head>
 <body class="pa-app">
@@ -421,13 +431,14 @@ body{margin:0}
       + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Operadores</span><span class="pa-label">02</span></div><span class="pa-stat__value">'+c.list.length+'</span></div>'
       + '<div class="pa-stat"><div class="pa-stat__head"><span class="pa-label">Kills totais</span><span class="pa-label">03</span></div><span class="pa-stat__value">'+totalK+'</span></div>'
       + '</div><div class="pa-gap" style="height:24px"></div>';
-    var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['highlights','Destaques'],['how','Como funciona']];
+    var tabs = [['ranking','Ranking'],['matches','Partidas'],['player','Jogadores'],['highlights','Destaques'],['teams','Montar times'],['how','Como funciona']];
     if(isOwner && artifact) tabs.push(['admin','+ Lançar partida']);
     h += '<nav class="pa-tabs" role="tablist">' + tabs.map(function(t){ return '<button class="pa-tab" role="tab" data-view="'+t[0]+'" aria-selected="'+(view===t[0])+'">'+t[1]+'</button>'; }).join('') + '</nav><div class="pa-gap"></div>';
     if(view==='ranking') h += vRanking(c);
     else if(view==='matches') h += vMatches(c, d);
     else if(view==='player') h += vPlayer(c);
     else if(view==='highlights') h += vHighlights(c);
+    else if(view==='teams') h += vTeams(c);
     else if(view==='how') h += vHow(c);
     else if(view==='admin') h += vAdmin();
     app.innerHTML = h;
@@ -702,6 +713,102 @@ body{margin:0}
     publish();
   }
 
+  var tsel = null, topt = 0;
+  function loadTsel(c){
+    var ok = false;
+    try { var s = JSON.parse(localStorage.getItem('pa-teams') || 'null'); if(s && typeof s === 'object'){ tsel = s; ok = true; } } catch(e){}
+    if(ok){ var any = Object.keys(tsel).some(function(n){ return c.per[n]; }); if(!any) ok = false; }
+    if(!ok) defaultTsel(c);
+  }
+  function defaultTsel(c){
+    tsel = {};
+    var l = c.list.slice().sort(function(a,b){ return b.n - a.n || b.score - a.score; });
+    l.forEach(function(p,i){ if(i < 10) tsel[p.name] = 1; else if(i < 15) tsel[p.name] = 2; });
+  }
+  function saveTsel(){ try { localStorage.setItem('pa-teams', JSON.stringify(tsel)); } catch(e){} }
+
+  function combos(arr, k, first){
+    var out = [];
+    (function rec(start, cur){
+      if(cur.length === k){ out.push(cur.slice()); return; }
+      for(var i=start;i<arr.length;i++){ cur.push(arr[i]); rec(i+1, cur); cur.pop(); }
+    })(1, [arr[0]]);
+    return out;
+  }
+
+  function teamPlan(c){
+    var st = [], rs = [], note = '';
+    Object.keys(tsel).forEach(function(n){ var p = c.per[n]; if(!p) return; if(tsel[n] === 1) st.push(p); else if(tsel[n] === 2) rs.push(p); });
+    st.sort(function(a,b){ return b.n - a.n || b.score - a.score; });
+    if(st.length > 10){ rs = rs.concat(st.slice(10)); note = 'Passou de 10 jogadores marcados: quem tem menos partidas virou reserva.'; st = st.slice(0,10); }
+    if(st.length % 2 === 1){ rs.push(st.pop()); note = 'Número ímpar de jogadores: quem tem menos partidas virou reserva.'; }
+    rs.sort(function(a,b){ return b.score - a.score; });
+    if(st.length < 2) return {st:st, rs:rs, opts:[], note:note};
+    var pm = {};
+    pairStats(c.matches).forEach(function(o){ pm[o.a+'|'+o.b] = o; });
+    function syn(T){
+      var s = 0, nm = T.map(function(p){ return p.name; }).sort();
+      for(var i=0;i<nm.length;i++) for(var j=i+1;j<nm.length;j++){ var o = pm[nm[i]+'|'+nm[j]]; if(o && o.n >= 3) s += (o.adj - 0.5) * 10; }
+      return s;
+    }
+    function sum(T, f){ return T.reduce(function(a,p){ return a + f(p); }, 0); }
+    var opts = combos(st, st.length/2).map(function(A){
+      var B = st.filter(function(p){ return A.indexOf(p) < 0; });
+      var sa = sum(A, function(p){ return p.score; }), sb = sum(B, function(p){ return p.score; });
+      var ka = sum(A, function(p){ return p.totalKD; }), kb = sum(B, function(p){ return p.totalKD; });
+      var ya = syn(A), yb = syn(B);
+      return {A:A, B:B, sa:sa, sb:sb, ka:ka, kb:kb, cost:Math.abs(sa-sb) + 2*Math.abs(ka-kb) + 1.5*Math.abs(ya-yb)};
+    });
+    opts.sort(function(x,y){ return x.cost - y.cost; });
+    return {st:st, rs:rs, opts:opts.slice(0,3), note:note};
+  }
+
+  function teamCol(T, sum, cls, name){
+    T = T.slice().sort(function(a,b){ return b.score - a.score; });
+    return '<div class="pa-team pa-team--'+cls+'"><div class="pa-team__head"><span class="pa-team__name">'+name+'</span><span class="pa-caption">soma '+f1(sum)+' · média '+f1(sum/T.length)+'</span></div><ol>'
+      + T.map(function(p){ return '<li><span>'+esc(p.name)+'</span><span class="pa-num">'+f1(p.score)+'</span></li>'; }).join('') + '</ol></div>';
+  }
+
+  function vTeams(c){
+    if(!c.list.length) return emptyBox();
+    if(!tsel) loadTsel(c);
+    var plan = teamPlan(c);
+    var chipsList = c.list.slice().sort(function(a,b){ return b.n - a.n || b.score - a.score; });
+    var h = heading('01','Quem vai jogar') + '<p class="pa-caption" style="margin:0 0 12px">Toque no nome pra alternar: <b>cinza</b> = fora, <b style="color:var(--accent)">laranja</b> = joga, <b style="color:var(--defense)">azul</b> = reserva. Os times são montados com a nota, o K/D total e o entrosamento das duplas.</p>'
+      + '<div class="pa-chips">' + chipsList.map(function(p){
+        var s = tsel[p.name] || 0;
+        return '<button type="button" class="pa-chip pa-chip--'+s+'" data-tp="'+esc(p.name)+'"><span class="pa-chip__n">'+esc(p.name)+'</span><span class="pa-chip__s">'+f1(p.score)+' · '+p.n+'j'+(p.ranked?'':' · placement')+'</span></button>';
+      }).join('') + '</div>'
+      + '<div class="pa-toolbar" style="margin-top:12px"><button class="pa-btn pa-btn--ghost pa-btn--sm" data-act="teams-reset">Padrão (10 mais ativos)</button><button class="pa-btn pa-btn--ghost pa-btn--sm" data-act="teams-clear">Limpar</button></div><div class="pa-gap"></div>';
+    h += heading('02','Times sugeridos');
+    if(!plan.opts.length){ return h + '<div class="pa-empty">Marque pelo menos 2 jogadores (laranja) pra montar os times.</div>'; }
+    if(topt >= plan.opts.length) topt = 0;
+    var o = plan.opts[topt], diff = Math.abs(o.sa - o.sb);
+    h += '<div class="pa-toolbar">' + plan.opts.map(function(x,i){ return '<button class="pa-btn pa-btn--sm'+(i===topt?'':' pa-btn--ghost')+'" data-topt="'+i+'">Opção '+(i+1)+'</button>'; }).join('') + '</div>';
+    h += '<article class="pa-match" style="margin-top:12px"><div class="pa-match__teams">' + teamCol(o.A,o.sa,'o','Time A') + teamCol(o.B,o.sb,'b','Time B') + '</div></article>';
+    h += '<p class="pa-caption" style="margin-top:12px">Diferença de nota: <b>'+f1(diff)+'</b> ('+(diff<=3?'muito equilibrado':(diff<=6?'equilibrado':'meio desigual'))+') · K/D total somado: '+f2(o.ka)+' × '+f2(o.kb)+'.'+(plan.note?' '+plan.note:'')+'</p>';
+    h += '<div class="pa-toolbar" style="margin-top:8px"><button class="pa-btn pa-btn--sm" data-act="teams-copy">Copiar times</button><span class="pa-caption" id="t-msg"></span></div>';
+    if(plan.rs.length){
+      h += '<div class="pa-gap"></div>' + heading('03','Reservas');
+      h += '<div class="pa-table-wrap"><table class="pa-table" style="min-width:420px"><thead><tr><th class="pa-label" style="text-align:left">Se faltar</th><th class="pa-label" style="text-align:left">Entra</th><th class="pa-label">Diferença de nota</th></tr></thead><tbody>'
+        + plan.st.slice().sort(function(a,b){ return b.score - a.score; }).map(function(p){
+          var best = null; plan.rs.forEach(function(r){ if(!best || Math.abs(r.score-p.score) < Math.abs(best.score-p.score)) best = r; });
+          var dlt = best.score - p.score;
+          return '<tr class="pa-row"><td style="text-align:left"><span class="pa-player__name">'+esc(p.name)+'</span> <span class="pa-caption">'+f1(p.score)+'</span></td><td style="text-align:left">'+esc(best.name)+' <span class="pa-caption">'+f1(best.score)+' · '+best.n+'j</span></td><td class="pa-num'+(Math.abs(dlt)<=4?' pa-good':'')+'">'+(dlt>0?'+':'')+f1(dlt)+'</td></tr>';
+        }).join('') + '</tbody></table></div><p class="pa-caption" style="margin-top:12px">Mostra o reserva com a nota mais parecida com a de cada titular. Se faltar mais de um, é só desmarcar os dois e o site refaz a divisão.</p>';
+    }
+    return h;
+  }
+
+  function teamsText(c){
+    var plan = teamPlan(c); if(!plan.opts.length) return '';
+    var o = plan.opts[topt] || plan.opts[0];
+    function line(T){ return T.slice().sort(function(a,b){ return b.score - a.score; }).map(function(p){ return '• '+p.name; }).join('\n'); }
+    var t = 'Pedrinhas Academy - Times\n\nTIME A (nota '+f1(o.sa)+')\n'+line(o.A)+'\n\nTIME B (nota '+f1(o.sb)+')\n'+line(o.B);
+    if(plan.rs.length) t += '\n\nReservas: ' + plan.rs.map(function(p){ return p.name; }).join(', ');
+    return t;
+  }
+
   function trendTag(p){
     if(p.move === null) return '';
     if(p.move === 'new') return '<span class="pa-trend pa-trend--new">novo</span>';
@@ -791,6 +898,16 @@ body{margin:0}
     var app = document.getElementById('app');
     Array.prototype.forEach.call(app.querySelectorAll('[data-view]'), function(b){ b.onclick = function(){ view = b.getAttribute('data-view'); if(view==='player') selected = null; render(); }; });
     Array.prototype.forEach.call(app.querySelectorAll('[data-player]'), function(r){ r.onclick = function(){ selected = r.getAttribute('data-player'); view = 'player'; render(); window.scrollTo(0,0); }; });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-tp]'), function(b){
+      b.onclick = function(){
+        var n = b.getAttribute('data-tp'), y = window.scrollY;
+        tsel[n] = ((tsel[n] || 0) + 1) % 3; if(!tsel[n]) delete tsel[n];
+        saveTsel(); topt = 0; render(); window.scrollTo(0, y);
+      };
+    });
+    Array.prototype.forEach.call(app.querySelectorAll('[data-topt]'), function(b){
+      b.onclick = function(){ var y = window.scrollY; topt = parseInt(b.getAttribute('data-topt'),10); render(); window.scrollTo(0, y); };
+    });
     var sel = document.getElementById('psel'); if(sel) sel.onchange = function(){ selected = sel.value; render(); };
     Array.prototype.forEach.call(app.querySelectorAll('[data-act]'), function(b){
       b.onclick = function(){
@@ -800,6 +917,16 @@ body{margin:0}
         else if(a==='back'){ selected = null; render(); }
         else if(a==='save-match'){ saveMatch(); }
         else if(a==='add-alias'){ addAlias(); }
+        else if(a==='teams-reset'){ defaultTsel(compute(STATE)); saveTsel(); topt = 0; render(); }
+        else if(a==='teams-clear'){ tsel = {}; saveTsel(); topt = 0; render(); }
+        else if(a==='teams-copy'){
+          var txt = teamsText(compute(STATE)), m = document.getElementById('t-msg');
+          function done(ok){ if(m) m.textContent = ok ? 'Copiado! Pode colar no grupo.' : 'Não consegui copiar. Selecione e copie manualmente.'; }
+          try {
+            if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ done(false); });
+            else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok); }
+          } catch(e){ done(false); }
+        }
       };
     });
     Array.prototype.forEach.call(app.querySelectorAll('[data-ralias]'), function(b){
